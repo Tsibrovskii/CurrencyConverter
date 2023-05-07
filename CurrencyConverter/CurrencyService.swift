@@ -4,21 +4,53 @@
 
 import Foundation
 
-class Service {
-    let url = URL(string: "https://api.apilayer.com/exchangerates_data/symbols")!
-    let key = "AgyTVSI1YGWROrV03KcYUlhsT0GHPtNt"
+enum SerivceError: Error {
+    case wrongUrl
+    case wrongData
+    case failureResult
+}
+
+protocol ServiceProtocol {
+    func getCurrencies(completion: @escaping (Result<[CurrencySymbol], SerivceError>) -> Void)
+}
+
+class Service: ServiceProtocol {
+    private let baseUrl = "https://api.apilayer.com"
+    private let key = "AgyTVSI1YGWROrV03KcYUlhsT0GHPtNt"
     
-    func getCurrencies(completion: @escaping (Result<[CurrencySymbol], Error>) -> Void) {
+    func getCurrencies(completion: @escaping (Result<[CurrencySymbol], SerivceError>) -> Void) {
+        let apiUrl = baseUrl + "/exchangerates_data/symbols"
+        
+        guard let url = URL(string: apiUrl) else {
+            completion(.failure(SerivceError.wrongUrl))
+            return
+        }
+
         var request = URLRequest(url: url);
         request.httpMethod = "GET";
         request.setValue(key, forHTTPHeaderField: "apikey")
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            
+            guard let data = data else {
+                completion(.failure(SerivceError.wrongData))
+                return
+            }
+            
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-            let symbols: CurrencySymbolsList = try! decoder.decode(CurrencySymbolsList.self, from: data!)
-            let currencySymbolArray: [CurrencySymbol] = symbols.symbols.map { (key, value) in
+            guard let symbols: CurrencySymbolsList = try? decoder.decode(CurrencySymbolsList.self, from: data) else {
+                completion(.failure(SerivceError.wrongData))
+                return
+            }
+            
+            if (!symbols.result) {
+                completion(.failure(SerivceError.failureResult))
+                return
+            }
+
+            let currencySymbolArray: [CurrencySymbol] = symbols.currencySymbols.map { (key, value) in
                 return CurrencySymbol(key: key, value: value)
             }
             completion(.success(currencySymbolArray))

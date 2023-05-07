@@ -16,6 +16,7 @@ class ViewController: UIViewController {
                 print(symbols)
                 print(symbols[0].key)
             case .failure(let error):
+                print(error)
                 print(error.localizedDescription)
             }
         }

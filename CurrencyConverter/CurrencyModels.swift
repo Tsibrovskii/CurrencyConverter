@@ -2,12 +2,20 @@
 //  Created by Dmitriy Mirovodin on 28.04.2023.
 //
 
-struct CurrencySymbolsList: Codable {
-    var symbols: [String:String]
+struct CurrencySymbolsList: Decodable {
+    var result: Bool
+    var currencySymbols: [String: String]
+}
+
+extension CurrencySymbolsList {
+    enum CodingKeys: String, CodingKey {
+        case result = "success"
+        case currencySymbols = "symbols"
+    }
 }
 
 
-struct CurrencySymbol: Codable {
+struct CurrencySymbol {
     var key: String
     var value: String
 }
