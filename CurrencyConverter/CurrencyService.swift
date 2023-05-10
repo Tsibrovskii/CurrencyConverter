@@ -104,11 +104,11 @@ class Service: ServiceProtocol {
                 completion(.failure(SerivceError.failureResult))
                 return
             }
-//
-//            let currencySymbolArray: [CurrencyList.CurrencySymbol] = symbols.currencySymbols.map { (key, value) in
-//                return CurrencyList.CurrencySymbol(key: key, value: value)
-//            }
-//            completion(.success(currencySymbolArray))
+
+            let currencySymbolArray: [Exchange.ExchangeRate] = exchangeRates.exchangeRates.map { (key, value) in
+                return Exchange.ExchangeRate(base: baseCurrency, currency: key, rate: value)
+            }
+            completion(.success(currencySymbolArray))
         })
         task.resume()
     }

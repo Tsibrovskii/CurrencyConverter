@@ -22,7 +22,12 @@ class ViewController: UIViewController {
 //        }
         self.currencyService.getExchangeRates(baseCurrency: "EUR", currencyList: ["GBP", "AUD"], completion: {
             result in
-            
+            switch result {
+            case .success(let rates):
+                print(rates)
+            case .failure(let error):
+                print(error)
+            }
         })
     }
 }
