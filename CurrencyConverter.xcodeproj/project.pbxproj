@@ -15,6 +15,7 @@
 		8E70354629FBDD0F00DDF4E8 /* CurrencyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70354429FBDD0F00DDF4E8 /* CurrencyModels.swift */; };
 		A53F69932A0FA8B700D59289 /* CurrencyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F69922A0FA8B700D59289 /* CurrencyHelper.swift */; };
 		A53F69952A0FAB3600D59289 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F69942A0FAB3600D59289 /* RequestBuilder.swift */; };
+		A55971992A1120710059832C /* DeserializeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55971982A1120710059832C /* DeserializeHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8E70354429FBDD0F00DDF4E8 /* CurrencyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyModels.swift; sourceTree = "<group>"; };
 		A53F69922A0FA8B700D59289 /* CurrencyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyHelper.swift; sourceTree = "<group>"; };
 		A53F69942A0FAB3600D59289 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		A55971982A1120710059832C /* DeserializeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializeHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				8E70354429FBDD0F00DDF4E8 /* CurrencyModels.swift */,
 				8E70354329FBDD0F00DDF4E8 /* CurrencyService.swift */,
 				A53F69922A0FA8B700D59289 /* CurrencyHelper.swift */,
+				A55971982A1120710059832C /* DeserializeHelper.swift */,
 				A53F69942A0FAB3600D59289 /* RequestBuilder.swift */,
 				8E25732229FBDCAC0088417B /* AppDelegate.swift */,
 				8E25732629FBDCAC0088417B /* ViewController.swift */,
@@ -147,6 +150,7 @@
 				8E25732329FBDCAC0088417B /* AppDelegate.swift in Sources */,
 				A53F69932A0FA8B700D59289 /* CurrencyHelper.swift in Sources */,
 				A53F69952A0FAB3600D59289 /* RequestBuilder.swift in Sources */,
+				A55971992A1120710059832C /* DeserializeHelper.swift in Sources */,
 				8E70354629FBDD0F00DDF4E8 /* CurrencyModels.swift in Sources */,
 				8E70354529FBDD0F00DDF4E8 /* CurrencyService.swift in Sources */,
 			);

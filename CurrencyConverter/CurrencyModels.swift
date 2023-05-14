@@ -19,8 +19,6 @@ enum CurrencyList {
     }
 }
 
-
-
 enum Exchange {
     struct ExchangeRatesList: Decodable {
         var baseCurrency: String

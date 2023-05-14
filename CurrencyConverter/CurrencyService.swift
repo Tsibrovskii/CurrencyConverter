@@ -23,10 +23,12 @@ class Service: ServiceProtocol {
     
     private let currencyHelper: CurrencyHelper
     private let requestBuilder: RequestBuilder
+    private let deserializeHelper: DeserializeHelper
     
     init() {
         self.currencyHelper = CurrencyHelper()
         self.requestBuilder = RequestBuilder()
+        self.deserializeHelper = DeserializeHelper()
     }
     
     func getCurrencies(completion: @escaping (Result<[CurrencyList.CurrencySymbol], SerivceError>) -> Void) {
@@ -47,25 +49,21 @@ class Service: ServiceProtocol {
         }
         
         let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
-            guard let data = data else {
-                completion(.failure(SerivceError.wrongData))
+            let symbols = self.deserializeHelper.deserializeData(dataRaw: data, type: CurrencyList.CurrencySymbolsList.self)
+            var symbolsResult: CurrencyList.CurrencySymbolsList
+            switch symbols {
+            case .failure(let serviceError):
+                completion(.failure(serviceError))
                 return
+            case .success(let result):
+                symbolsResult = result
             }
-            
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-            guard let symbols: CurrencyList.CurrencySymbolsList = try? decoder.decode(CurrencyList.CurrencySymbolsList.self, from: data) else {
-                completion(.failure(SerivceError.wrongData))
-                return
-            }
-            
-            if (!symbols.result) {
+            if (!symbolsResult.result) {
                 completion(.failure(SerivceError.failureResult))
                 return
             }
 
-            let currencySymbolArray: [CurrencyList.CurrencySymbol] = symbols.currencySymbols.map { (key, value) in
+            let currencySymbolArray: [CurrencyList.CurrencySymbol] = symbolsResult.currencySymbols.map { (key, value) in
                 return CurrencyList.CurrencySymbol(key: key, value: value)
             }
             completion(.success(currencySymbolArray))
@@ -92,26 +90,21 @@ class Service: ServiceProtocol {
         }
         
         let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
-            
-            guard let data = data else {
-                completion(.failure(SerivceError.wrongData))
+            let rates = self.deserializeHelper.deserializeData(dataRaw: data, type: Exchange.ExchangeRatesList.self)
+            var ratesResult: Exchange.ExchangeRatesList
+            switch rates {
+            case .failure(let serviceError):
+                completion(.failure(serviceError))
                 return
+            case .success(let result):
+                ratesResult = result
             }
-            
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-            guard let exchangeRates: Exchange.ExchangeRatesList = try? decoder.decode(Exchange.ExchangeRatesList.self, from: data) else {
-                completion(.failure(SerivceError.wrongData))
-                return
-            }
-
-            if (!exchangeRates.result) {
+            if (!ratesResult.result) {
                 completion(.failure(SerivceError.failureResult))
                 return
             }
 
-            let currencySymbolArray: [Exchange.ExchangeRate] = exchangeRates.exchangeRates.map { (key, value) in
+            let currencySymbolArray: [Exchange.ExchangeRate] = ratesResult.exchangeRates.map { (key, value) in
                 return Exchange.ExchangeRate(base: baseCurrency, currency: key, rate: value)
             }
             completion(.success(currencySymbolArray))
