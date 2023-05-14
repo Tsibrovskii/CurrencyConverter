@@ -9,6 +9,9 @@ enum SerivceError: Error {
     case wrongData
     case failureResult
     case wrongParams
+    case wrongMethod
+    case wrongHeaders
+    case wrongUrlWithParams
 }
 
 protocol ServiceProtocol {
@@ -17,23 +20,33 @@ protocol ServiceProtocol {
 }
 
 class Service: ServiceProtocol {
-    private let baseUrl = "https://api.apilayer.com"
-    private let key = "AgyTVSI1YGWROrV03KcYUlhsT0GHPtNt"
+    
+    private let currencyHelper: CurrencyHelper
+    private let requestBuilder: RequestBuilder
+    
+    init() {
+        self.currencyHelper = CurrencyHelper()
+        self.requestBuilder = RequestBuilder()
+    }
     
     func getCurrencies(completion: @escaping (Result<[CurrencyList.CurrencySymbol], SerivceError>) -> Void) {
-        let apiUrl = baseUrl + "/exchangerates_data/symbols"
         
-        guard let url = URL(string: apiUrl) else {
-            completion(.failure(SerivceError.wrongUrl))
+        let request = requestBuilder
+            .setEndPoint(baseUrl: currencyHelper.baseUrl, endPoint: currencyHelper.currenciesUrl)
+            .setMethod(method: CurrencyHelper.HTTPMethods.GET.rawValue)
+            .setHeaders(headers: ["apikey": currencyHelper.key])
+            .build()
+        
+        var requestUrl: URLRequest
+        switch request {
+        case .failure(let serviceError):
+            completion(.failure(serviceError))
             return
+        case .success(let request):
+            requestUrl = request
         }
-
-        var request = URLRequest(url: url);
-        request.httpMethod = "GET";
-        request.setValue(key, forHTTPHeaderField: "apikey")
         
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-            
+        let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
             guard let data = data else {
                 completion(.failure(SerivceError.wrongData))
                 return
@@ -62,30 +75,23 @@ class Service: ServiceProtocol {
     
     func getExchangeRates(baseCurrency: String, currencyList: [String], completion: @escaping (Result<[Exchange.ExchangeRate], SerivceError>) -> Void) {
         
-        var urlComponents = URLComponents()
-        urlComponents.queryItems = [URLQueryItem(name: "base", value: baseCurrency)]
+        let request = requestBuilder
+            .setEndPoint(baseUrl: currencyHelper.baseUrl, endPoint: currencyHelper.exchangeData)
+            .setMethod(method: CurrencyHelper.HTTPMethods.GET.rawValue)
+            .setHeaders(headers: ["apikey": currencyHelper.key])
+            .setParams(params: ["base" :baseCurrency, "symbols" :currencyList.joined(separator: ",")])
+            .build()
         
-        if (!currencyList.isEmpty) {
-            urlComponents.queryItems?.append(URLQueryItem(name: "symbols", value: currencyList.joined(separator: ",")))
-        }
-        
-        guard let params = urlComponents.url else {
-            completion(.failure(SerivceError.wrongParams))
+        var requestUrl: URLRequest
+        switch request {
+        case .failure(let serviceError):
+            completion(.failure(serviceError))
             return
-        }
-
-        let apiUrl = baseUrl + "/exchangerates_data/latest" + params.absoluteString
-        
-        guard let url = URL(string: apiUrl) else {
-            completion(.failure(SerivceError.wrongUrl))
-            return
+        case .success(let request):
+            requestUrl = request
         }
         
-        var request = URLRequest(url: url);
-        request.httpMethod = "GET";
-        request.setValue(key, forHTTPHeaderField: "apikey")
-        
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+        let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
             
             guard let data = data else {
                 completion(.failure(SerivceError.wrongData))
