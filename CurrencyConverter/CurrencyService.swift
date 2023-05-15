@@ -48,27 +48,35 @@ class Service: ServiceProtocol {
             requestUrl = request
         }
         
-        let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
-            let symbols = self.deserializeHelper.deserializeData(dataRaw: data, type: CurrencyList.CurrencySymbolsList.self)
-            var symbolsResult: CurrencyList.CurrencySymbolsList
-            switch symbols {
-            case .failure(let serviceError):
-                completion(.failure(serviceError))
-                return
-            case .success(let result):
-                symbolsResult = result
-            }
-            if (!symbolsResult.result) {
-                completion(.failure(SerivceError.failureResult))
-                return
-            }
-
-            let currencySymbolArray: [CurrencyList.CurrencySymbol] = symbolsResult.currencySymbols.map { (key, value) in
-                return CurrencyList.CurrencySymbol(key: key, value: value)
-            }
-            completion(.success(currencySymbolArray))
-        })
-        task.resume()
+        DispatchQueue.global(qos: .utility).async {
+            let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
+                let symbols = self.deserializeHelper.deserializeData(dataRaw: data, type: CurrencyList.CurrencySymbolsList.self)
+                var symbolsResult: CurrencyList.CurrencySymbolsList
+                switch symbols {
+                case .failure(let serviceError):
+                    DispatchQueue.main.async {
+                        completion(.failure(serviceError))
+                    }
+                    return
+                case .success(let result):
+                    symbolsResult = result
+                }
+                if (!symbolsResult.result) {
+                    DispatchQueue.main.async {
+                        completion(.failure(SerivceError.failureResult))
+                    }
+                    return
+                }
+                
+                let currencySymbolArray: [CurrencyList.CurrencySymbol] = symbolsResult.currencySymbols.map { (key, value) in
+                    return CurrencyList.CurrencySymbol(key: key, value: value)
+                }
+                DispatchQueue.main.async {
+                    completion(.success(currencySymbolArray))
+                }
+            })
+            task.resume()
+        }
     }
     
     func getExchangeRates(baseCurrency: String, currencyList: [String], completion: @escaping (Result<[Exchange.ExchangeRate], SerivceError>) -> Void) {
@@ -89,27 +97,35 @@ class Service: ServiceProtocol {
             requestUrl = request
         }
         
-        let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
-            let rates = self.deserializeHelper.deserializeData(dataRaw: data, type: Exchange.ExchangeRatesList.self)
-            var ratesResult: Exchange.ExchangeRatesList
-            switch rates {
-            case .failure(let serviceError):
-                completion(.failure(serviceError))
-                return
-            case .success(let result):
-                ratesResult = result
-            }
-            if (!ratesResult.result) {
-                completion(.failure(SerivceError.failureResult))
-                return
-            }
-
-            let currencySymbolArray: [Exchange.ExchangeRate] = ratesResult.exchangeRates.map { (key, value) in
-                return Exchange.ExchangeRate(base: baseCurrency, currency: key, rate: value)
-            }
-            completion(.success(currencySymbolArray))
-        })
-        task.resume()
+        DispatchQueue.global(qos: .utility).async {
+            let task = URLSession.shared.dataTask(with: requestUrl, completionHandler: { data, response, error in
+                let rates = self.deserializeHelper.deserializeData(dataRaw: data, type: Exchange.ExchangeRatesList.self)
+                var ratesResult: Exchange.ExchangeRatesList
+                switch rates {
+                case .failure(let serviceError):
+                    DispatchQueue.main.async {
+                        completion(.failure(serviceError))
+                    }
+                    return
+                case .success(let result):
+                    ratesResult = result
+                }
+                if (!ratesResult.result) {
+                    DispatchQueue.main.async {
+                        completion(.failure(SerivceError.failureResult))
+                    }
+                    return
+                }
+                
+                let currencySymbolArray: [Exchange.ExchangeRate] = ratesResult.exchangeRates.map { (key, value) in
+                    return Exchange.ExchangeRate(base: baseCurrency, currency: key, rate: value)
+                }
+                DispatchQueue.main.async {
+                    completion(.success(currencySymbolArray))
+                }
+            })
+            task.resume()
+        }
     }
 }
 

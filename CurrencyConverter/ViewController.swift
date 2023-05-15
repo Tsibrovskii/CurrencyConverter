@@ -10,16 +10,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        self.currencyService.getCurrencies(){ result in
-//            switch result {
-//            case .success(let symbols):
-//                print(symbols)
-//                print(symbols[0].key)
-//            case .failure(let error):
-//                print(error)
-//                print(error.localizedDescription)
-//            }
-//        }
+        self.currencyService.getCurrencies(){ result in
+            switch result {
+            case .success(let symbols):
+                print(symbols)
+                print(symbols[0].key)
+            case .failure(let error):
+                print(error)
+                print(error.localizedDescription)
+            }
+        }
         self.currencyService.getExchangeRates(baseCurrency: "EUR", currencyList: ["GBP", "AUD"], completion: {
             result in
             switch result {
