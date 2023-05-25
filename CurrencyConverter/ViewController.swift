@@ -6,7 +6,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var currencyService = Service()
+    var currencyService = Service(currencyHelper: CurrencyHelper(), requestBuilder: RequestBuilder(), deserializeHelper: DeserializeHelper())
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

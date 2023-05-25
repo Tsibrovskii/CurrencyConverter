@@ -34,6 +34,9 @@ class RequestBuilder {
     }
     
     func build() -> Result<URLRequest, SerivceError> {
+        defer {
+            clean()
+        }
         guard let params = processParams().url else {
             return .failure(SerivceError.wrongParams)
         }
@@ -78,5 +81,12 @@ class RequestBuilder {
             }
         }
         return urlComponents
+    }
+
+    func clean() -> Void {
+        self.apiUrl = nil
+        self.method = nil
+        self.headers = nil
+        self.params = nil
     }
 }
