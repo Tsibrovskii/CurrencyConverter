@@ -84,7 +84,7 @@ class RequestBuilder {
     }
 
     func clean() -> Void {
-        self.apiUrl = nil
+        apiUrl = nil
         self.method = nil
         self.headers = nil
         self.params = nil
