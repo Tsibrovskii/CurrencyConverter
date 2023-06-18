@@ -13,8 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let viewController = ViewController()
-        let nav = UINavigationController(rootViewController: viewController)
+//        let factory = FactoryController()
+//
+//        let viewController = CurrencyListViewController(
+//            currencyService: factory.getCurrenciesService()
+//        )
+        
+        let nav = UINavigationController(rootViewController: MainController())
         
         let appearance = UINavigationBarAppearance()
         appearance.shadowImage = nil
