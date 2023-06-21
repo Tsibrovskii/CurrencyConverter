@@ -38,9 +38,3 @@ enum Exchange {
         var rate: Double
     }
 }
-
-
-// Делаем структуру, которая хранит ключ(значение) символа и его описание
-// Читаем про String, Struct, Value type.
-// Читаем про Array, Dictionary.
-// Читаем про Codable

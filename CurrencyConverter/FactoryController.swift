@@ -7,8 +7,9 @@
 
 import Foundation
 
-class FactoryController {
-    func getCurrenciesService() -> ServiceProtocol {
+// TODO: нейминг !!! CurrenciesServiceFactory
+class FactoryCurrenciesService {  // ???
+    func createCurrenciesService() -> ServiceProtocol {
         return Service(
             currencyHelper: CurrencyHelper(),
             requestBuilder: RequestBuilder(),
