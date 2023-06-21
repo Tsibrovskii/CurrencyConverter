@@ -2,13 +2,16 @@
 //  Created by Dmitriy Mirovodin on 28.04.2023.
 //
 
-//выбор ячеек?
-//каким образом выбирать несколько?
-//reuse правильно?
 
 import UIKit
 
+protocol CurrencyListViewDelegateProtocol: AnyObject {
+    func selectionChanged(currencyId: String, isSelected: Bool)
+}
+
 final class CurrencyListViewController: UIViewController {
+    
+    weak var delegate: CurrencyListViewDelegateProtocol?
     
     private let currencyService: ServiceProtocol
     private var data: [CurrencyList.CurrencySymbol] = []
@@ -22,7 +25,7 @@ final class CurrencyListViewController: UIViewController {
         return view
     }()
     
-    init(currencyService: ServiceProtocol) {
+    init(currencyService: ServiceProtocol, select: Set<String>) {
         self.currencyService = currencyService
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,7 +57,30 @@ final class CurrencyListViewController: UIViewController {
     }
 }
 
-extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource {
+extension CurrencyListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
+        let model = CurrencyNameCell.Model(
+            currencyCode: "",
+            currencyName: data[indexPath.row].value,
+            isChecked: true
+        )
+        selectedCell?.update(with: model)
+    }
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
+        let model = CurrencyNameCell.Model(
+            currencyCode: "",
+            currencyName: data[indexPath.row].value,
+            isChecked: false
+        )
+        selectedCell?.update(with: model)
+    }
+}
+    
+extension CurrencyListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         data.count
@@ -73,28 +99,6 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
         )
         cell?.update(with: model)
         return cell ?? UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
-        let model = CurrencyNameCell.Model(
-            currencyCode: "",
-            currencyName: data[indexPath.row].value,
-            isChecked: true
-        )
-        selectedCell?.update(with: model)
-//        selectedCell?.contentView.backgroundColor = .orange
-    }
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
-        let model = CurrencyNameCell.Model(
-            currencyCode: "",
-            currencyName: data[indexPath.row].value,
-            isChecked: false
-        )
-        selectedCell?.update(with: model)
-//        selectedCell?.contentView.backgroundColor = .none
     }
 }
 

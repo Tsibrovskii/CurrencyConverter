@@ -7,13 +7,27 @@
 
 import UIKit
 
-class MainController: UIViewController {
+final class MainController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .orange
+        setupNavBar()
+    }
+}
+
+private extension MainController {
+    
+    func setupNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(goToCurrenciesList))
     }
     
-    @objc func goToCurrenciesList() {
-        navigationController?.pushViewController(CurrencyListViewController(currencyService: FactoryController().getCurrenciesService()), animated: true)
+    @objc
+    func goToCurrenciesList() {
+        let service = FactoryController().getCurrenciesService()
+        let vc = CurrencyListViewController(currencyService: service)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+// Responder Chain
+// Message dispatcing
+
