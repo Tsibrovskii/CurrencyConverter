@@ -13,12 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-//        let factory = FactoryController()
-//
-//        let viewController = CurrencyListViewController(
-//            currencyService: factory.getCurrenciesService()
-//        )
-        
         let nav = UINavigationController(rootViewController: MainController())
         
         let appearance = UINavigationBarAppearance()

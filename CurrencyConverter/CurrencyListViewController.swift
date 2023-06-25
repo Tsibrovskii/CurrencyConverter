@@ -15,6 +15,7 @@ final class CurrencyListViewController: UIViewController {
     
     private let currencyService: ServiceProtocol
     private var data: [CurrencyList.CurrencySymbol] = []
+    private var selectedCells: Set<String> = []
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -27,6 +28,7 @@ final class CurrencyListViewController: UIViewController {
     
     init(currencyService: ServiceProtocol, select: Set<String>) {
         self.currencyService = currencyService
+        self.selectedCells = select
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,22 +63,15 @@ extension CurrencyListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
-        let model = CurrencyNameCell.Model(
-            currencyCode: "",
-            currencyName: data[indexPath.row].value,
-            isChecked: true
-        )
-        selectedCell?.update(with: model)
-    }
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
-        let model = CurrencyNameCell.Model(
-            currencyCode: "",
-            currencyName: data[indexPath.row].value,
-            isChecked: false
-        )
-        selectedCell?.update(with: model)
+        if self.selectedCells.contains(data[indexPath.row].key) {
+            guard let index = self.selectedCells.firstIndex(of: data[indexPath.row].key) else {
+                return
+            }
+            self.selectedCells.remove(at: index)
+        } else {
+            self.selectedCells.insert(data[indexPath.row].key)
+        }
+        tableView.reloadData()
     }
 }
     
@@ -92,10 +87,11 @@ extension CurrencyListViewController: UITableViewDataSource {
             for: indexPath
         ) as? CurrencyNameCell
         
+        let checkedValue = self.selectedCells.contains(data[indexPath.row].key) ? true : false
         let model = CurrencyNameCell.Model(
-            currencyCode: "",
+            currencyCode: data[indexPath.row].key,
             currencyName: data[indexPath.row].value,
-            isChecked: false
+            isChecked: checkedValue
         )
         cell?.update(with: model)
         return cell ?? UITableViewCell()

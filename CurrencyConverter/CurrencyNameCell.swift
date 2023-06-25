@@ -35,8 +35,6 @@ final class CurrencyNameCell: UITableViewCell {
     override func prepareForReuse() {
         // Поиграться с prepareForReuse
         super.prepareForReuse()
-        // TODO: не нужно
-        accessoryType = .none
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,7 +43,7 @@ final class CurrencyNameCell: UITableViewCell {
     }
     
     func update(with model: Model) {
-        currencyNameLabel.text = model.currencyName
+        currencyNameLabel.text = model.currencyCode + " - " + model.currencyName
         // TODO: Перейти на обновление через модель
         if model.isChecked {
             accessoryType = .checkmark

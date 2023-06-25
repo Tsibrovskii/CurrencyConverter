@@ -22,8 +22,8 @@ private extension MainController {
     
     @objc
     func goToCurrenciesList() {
-        let service = FactoryController().getCurrenciesService()
-        let vc = CurrencyListViewController(currencyService: service)
+        let service = CurrenciesServiceFactory().createCurrenciesService()
+        let vc = CurrencyListViewController(currencyService: service, select: [])
         navigationController?.pushViewController(vc, animated: true)
     }
 }

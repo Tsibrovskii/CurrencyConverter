@@ -17,7 +17,7 @@
 		A53F69952A0FAB3600D59289 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F69942A0FAB3600D59289 /* RequestBuilder.swift */; };
 		A55971992A1120710059832C /* DeserializeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55971982A1120710059832C /* DeserializeHelper.swift */; };
 		A57AF0402A32616F00448BA0 /* CurrencyNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AF03F2A32616F00448BA0 /* CurrencyNameCell.swift */; };
-		A57AF0422A3E0FA300448BA0 /* FactoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AF0412A3E0FA300448BA0 /* FactoryController.swift */; };
+		A57AF0422A3E0FA300448BA0 /* CurrenciesServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AF0412A3E0FA300448BA0 /* CurrenciesServiceFactory.swift */; };
 		A57AF0442A3F4C0600448BA0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AF0432A3F4C0600448BA0 /* MainController.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +34,7 @@
 		A53F69942A0FAB3600D59289 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		A55971982A1120710059832C /* DeserializeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeserializeHelper.swift; sourceTree = "<group>"; };
 		A57AF03F2A32616F00448BA0 /* CurrencyNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNameCell.swift; sourceTree = "<group>"; };
-		A57AF0412A3E0FA300448BA0 /* FactoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryController.swift; sourceTree = "<group>"; };
+		A57AF0412A3E0FA300448BA0 /* CurrenciesServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesServiceFactory.swift; sourceTree = "<group>"; };
 		A57AF0432A3F4C0600448BA0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +75,7 @@
 				A57AF03F2A32616F00448BA0 /* CurrencyNameCell.swift */,
 				A53F69942A0FAB3600D59289 /* RequestBuilder.swift */,
 				8E25732229FBDCAC0088417B /* AppDelegate.swift */,
-				A57AF0412A3E0FA300448BA0 /* FactoryController.swift */,
+				A57AF0412A3E0FA300448BA0 /* CurrenciesServiceFactory.swift */,
 				8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */,
 				A57AF0432A3F4C0600448BA0 /* MainController.swift */,
 				8E25732B29FBDCAD0088417B /* Assets.xcassets */,
@@ -164,7 +164,7 @@
 				A57AF0402A32616F00448BA0 /* CurrencyNameCell.swift in Sources */,
 				8E70354629FBDD0F00DDF4E8 /* CurrencyModels.swift in Sources */,
 				8E70354529FBDD0F00DDF4E8 /* CurrencyService.swift in Sources */,
-				A57AF0422A3E0FA300448BA0 /* FactoryController.swift in Sources */,
+				A57AF0422A3E0FA300448BA0 /* CurrenciesServiceFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
