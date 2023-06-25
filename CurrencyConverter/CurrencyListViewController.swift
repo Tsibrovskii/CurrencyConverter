@@ -62,7 +62,6 @@ final class CurrencyListViewController: UIViewController {
 extension CurrencyListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCell = tableView.cellForRow(at: indexPath) as? CurrencyNameCell
         if self.selectedCells.contains(data[indexPath.row].key) {
             guard let index = self.selectedCells.firstIndex(of: data[indexPath.row].key) else {
                 return
@@ -89,7 +88,7 @@ extension CurrencyListViewController: UITableViewDataSource {
         
         let checkedValue = self.selectedCells.contains(data[indexPath.row].key) ? true : false
         let model = CurrencyNameCell.Model(
-            currencyCode: data[indexPath.row].key,
+            currencyId: data[indexPath.row].key,
             currencyName: data[indexPath.row].value,
             isChecked: checkedValue
         )

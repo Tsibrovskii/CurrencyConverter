@@ -10,7 +10,7 @@ import UIKit
 final class CurrencyNameCell: UITableViewCell {
     
     struct Model {
-        let currencyCode: String
+        let currencyId: String
         let currencyName: String
         let isChecked: Bool
     }
@@ -43,7 +43,7 @@ final class CurrencyNameCell: UITableViewCell {
     }
     
     func update(with model: Model) {
-        currencyNameLabel.text = model.currencyCode + " - " + model.currencyName
+        currencyNameLabel.text = model.currencyId + " - " + model.currencyName
         // TODO: Перейти на обновление через модель
         if model.isChecked {
             accessoryType = .checkmark
