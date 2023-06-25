@@ -11,7 +11,7 @@ protocol CurrencyListViewDelegateProtocol: AnyObject {
 
 final class CurrencyListViewController: UIViewController {
     
-    weak var delegate: CurrencyListViewDelegateProtocol?
+    weak var currencyDelegate: CurrencyListViewDelegateProtocol?
     
     private let currencyService: ServiceProtocol
     private var data: [CurrencyList.CurrencySymbol] = []
@@ -23,6 +23,7 @@ final class CurrencyListViewController: UIViewController {
         view.delegate = self
         view.dataSource = self
         view.register(CurrencyNameCell.self, forCellReuseIdentifier: Constants.currencyCellId)
+        self.currencyDelegate = self
         return view
     }()
     
@@ -59,18 +60,25 @@ final class CurrencyListViewController: UIViewController {
     }
 }
 
-extension CurrencyListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.selectedCells.contains(data[indexPath.row].key) {
-            guard let index = self.selectedCells.firstIndex(of: data[indexPath.row].key) else {
+extension CurrencyListViewController: CurrencyListViewDelegateProtocol {
+    func selectionChanged(currencyId: String, isSelected: Bool) {
+        if isSelected {
+            guard let index = self.selectedCells.firstIndex(of: currencyId) else {
                 return
             }
             self.selectedCells.remove(at: index)
         } else {
-            self.selectedCells.insert(data[indexPath.row].key)
+            self.selectedCells.insert(currencyId)
         }
         tableView.reloadData()
+    }
+}
+
+extension CurrencyListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let isSelectedCell = self.selectedCells.contains(data[indexPath.row].key)
+        selectionChanged(currencyId: data[indexPath.row].key, isSelected: isSelectedCell)
     }
 }
     
