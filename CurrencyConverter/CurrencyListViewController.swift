@@ -23,7 +23,6 @@ final class CurrencyListViewController: UIViewController {
         view.delegate = self
         view.dataSource = self
         view.register(CurrencyNameCell.self, forCellReuseIdentifier: Constants.currencyCellId)
-        self.currencyDelegate = self
         return view
     }()
     
@@ -60,8 +59,11 @@ final class CurrencyListViewController: UIViewController {
     }
 }
 
-extension CurrencyListViewController: CurrencyListViewDelegateProtocol {
-    func selectionChanged(currencyId: String, isSelected: Bool) {
+extension CurrencyListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let isSelected = self.selectedCells.contains(data[indexPath.row].key)
+        let currencyId = data[indexPath.row].key
         if isSelected {
             guard let index = self.selectedCells.firstIndex(of: currencyId) else {
                 return
@@ -71,14 +73,7 @@ extension CurrencyListViewController: CurrencyListViewDelegateProtocol {
             self.selectedCells.insert(currencyId)
         }
         tableView.reloadData()
-    }
-}
-
-extension CurrencyListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isSelectedCell = self.selectedCells.contains(data[indexPath.row].key)
-        selectionChanged(currencyId: data[indexPath.row].key, isSelected: isSelectedCell)
+        currencyDelegate?.selectionChanged(currencyId: currencyId, isSelected: isSelected)
     }
 }
     
