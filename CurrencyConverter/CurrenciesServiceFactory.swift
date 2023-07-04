@@ -8,8 +8,8 @@
 import Foundation
 
 class CurrenciesServiceFactory {
-    func createCurrenciesService() -> ServiceProtocol {
-        return Service(
+    func create() -> ServiceProtocol {
+        Service(
             currencyHelper: CurrencyHelper(),
             requestBuilder: RequestBuilder(),
             deserializeHelper: DeserializeHelper()

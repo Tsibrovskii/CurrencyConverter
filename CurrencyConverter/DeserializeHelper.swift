@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DeserializeHelper {
+final class DeserializeHelper {
     func deserializeData<T: Decodable>(dataRaw: Data?, type: T.Type) -> Result<T, SerivceError> {
         guard let data = dataRaw else {
             return .failure(SerivceError.wrongData)

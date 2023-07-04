@@ -19,7 +19,7 @@ protocol ServiceProtocol {
     func getExchangeRates(baseCurrency: String, currencyList: [String], completion: @escaping (Result<[Exchange.ExchangeRate], SerivceError>) -> Void)
 }
 
-class Service: ServiceProtocol {
+final class Service: ServiceProtocol {
     
     private let currencyHelper: CurrencyHelper
     private let requestBuilder: RequestBuilder

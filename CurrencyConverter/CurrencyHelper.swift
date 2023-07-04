@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CurrencyHelper {
+final class CurrencyHelper {
     let baseUrl = "https://api.apilayer.com"
     let currenciesUrl = "/exchangerates_data/symbols"
     let exchangeData = "/exchangerates_data/latest"
@@ -16,5 +16,4 @@ class CurrencyHelper {
     enum HTTPMethods: String {
         case GET = "GET"
     }
-    
 }

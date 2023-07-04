@@ -44,12 +44,7 @@ final class CurrencyNameCell: UITableViewCell {
     
     func update(with model: Model) {
         currencyNameLabel.text = model.currencyId + " - " + model.currencyName
-        // TODO: Перейти на обновление через модель
-        if model.isChecked {
-            accessoryType = .checkmark
-        } else {
-            accessoryType = .none
-        }
+        accessoryType = model.isChecked ? .checkmark : .none
     }
 }
 

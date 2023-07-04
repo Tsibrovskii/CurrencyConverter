@@ -15,7 +15,7 @@ final class CurrencyListViewController: UIViewController {
     
     private let currencyService: ServiceProtocol
     private var data: [CurrencyList.CurrencySymbol] = []
-    private var selectedCells: Set<String> = []
+    private var selectedIds: Set<String> = []
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -26,9 +26,9 @@ final class CurrencyListViewController: UIViewController {
         return view
     }()
     
-    init(currencyService: ServiceProtocol, select: Set<String>) {
+    init(currencyService: ServiceProtocol, selectedIds: Set<String>) {
         self.currencyService = currencyService
-        self.selectedCells = select
+        self.selectedIds = selectedIds
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -62,15 +62,17 @@ final class CurrencyListViewController: UIViewController {
 extension CurrencyListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isSelected = self.selectedCells.contains(data[indexPath.row].key)
+        
         let currencyId = data[indexPath.row].key
+        
+        var isSelected = selectedIds.contains(currencyId)
+        
+        isSelected = !isSelected
+        
         if isSelected {
-            guard let index = self.selectedCells.firstIndex(of: currencyId) else {
-                return
-            }
-            self.selectedCells.remove(at: index)
+            selectedIds.remove(currencyId)
         } else {
-            self.selectedCells.insert(currencyId)
+            selectedIds.insert(currencyId)
         }
         tableView.reloadData()
         currencyDelegate?.selectionChanged(currencyId: currencyId, isSelected: isSelected)
@@ -89,11 +91,14 @@ extension CurrencyListViewController: UITableViewDataSource {
             for: indexPath
         ) as? CurrencyNameCell
         
-        let checkedValue = self.selectedCells.contains(data[indexPath.row].key) ? true : false
+        let key = data[indexPath.row].key
+        
+        let isChecked = selectedIds.contains(key)
+        
         let model = CurrencyNameCell.Model(
             currencyId: data[indexPath.row].key,
             currencyName: data[indexPath.row].value,
-            isChecked: checkedValue
+            isChecked: isChecked
         )
         cell?.update(with: model)
         return cell ?? UITableViewCell()
