@@ -70,9 +70,9 @@ extension CurrencyListViewController: UITableViewDelegate {
         isSelected = !isSelected
         
         if isSelected {
-            selectedIds.remove(currencyId)
-        } else {
             selectedIds.insert(currencyId)
+        } else {
+            selectedIds.remove(currencyId)
         }
         tableView.reloadData()
         currencyDelegate?.selectionChanged(currencyId: currencyId, isSelected: isSelected)
@@ -83,6 +83,10 @@ extension CurrencyListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         data.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        40
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
