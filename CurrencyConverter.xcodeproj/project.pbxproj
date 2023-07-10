@@ -20,6 +20,7 @@
 		A57AF0422A3E0FA300448BA0 /* CurrenciesServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AF0412A3E0FA300448BA0 /* CurrenciesServiceFactory.swift */; };
 		A57AF0442A3F4C0600448BA0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57AF0432A3F4C0600448BA0 /* MainController.swift */; };
 		A5D4EC5D2A5AE12900269A82 /* CurrencyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4EC5C2A5AE12900269A82 /* CurrencyInfoCell.swift */; };
+		A5D4EC5F2A5C757000269A82 /* CurrencyListViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4EC5E2A5C757000269A82 /* CurrencyListViewFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		A57AF0412A3E0FA300448BA0 /* CurrenciesServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesServiceFactory.swift; sourceTree = "<group>"; };
 		A57AF0432A3F4C0600448BA0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		A5D4EC5C2A5AE12900269A82 /* CurrencyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoCell.swift; sourceTree = "<group>"; };
+		A5D4EC5E2A5C757000269A82 /* CurrencyListViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				A57AF0412A3E0FA300448BA0 /* CurrenciesServiceFactory.swift */,
 				8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */,
 				A57AF0432A3F4C0600448BA0 /* MainController.swift */,
+				A5D4EC5E2A5C757000269A82 /* CurrencyListViewFactory.swift */,
 				8E25732B29FBDCAD0088417B /* Assets.xcassets */,
 				8E25732D29FBDCAD0088417B /* LaunchScreen.storyboard */,
 				8E25733029FBDCAD0088417B /* Info.plist */,
@@ -160,6 +163,7 @@
 			files = (
 				8E25732729FBDCAC0088417B /* CurrencyListViewController.swift in Sources */,
 				8E25732329FBDCAC0088417B /* AppDelegate.swift in Sources */,
+				A5D4EC5F2A5C757000269A82 /* CurrencyListViewFactory.swift in Sources */,
 				A53F69932A0FA8B700D59289 /* CurrencyHelper.swift in Sources */,
 				A53F69952A0FAB3600D59289 /* RequestBuilder.swift in Sources */,
 				A57AF0442A3F4C0600448BA0 /* MainController.swift in Sources */,

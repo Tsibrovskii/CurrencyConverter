@@ -16,6 +16,7 @@ final class CurrencyInfoCell: UITableViewCell {
         let currencyExchangeRate: String
     }
     
+    //надо в uiview обернуть для начала?
     private lazy var currencyImage: UIImageView = {
         let currencyImage = UIImageView()
         currencyImage.layer.cornerRadius = 16
@@ -26,6 +27,7 @@ final class CurrencyInfoCell: UITableViewCell {
     private lazy var currencyId: UILabel = {
         let currencyId = UILabel()
         currencyId.numberOfLines = 1
+        //тут верно шрифт задается?
         currencyId.font = UIFont.boldSystemFont(ofSize: 16)
         return currencyId
     }()
