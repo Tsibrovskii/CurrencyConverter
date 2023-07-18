@@ -14,20 +14,20 @@ final class CurrencyInfoCell: UITableViewCell {
         let currencyName: String
         let totalAmount: String
         let currencyExchangeRate: String
+        let image: UIImage
     }
     
-    //надо в uiview обернуть для начала?
     private lazy var currencyImage: UIImageView = {
         let currencyImage = UIImageView()
         currencyImage.layer.cornerRadius = 16
         currencyImage.clipsToBounds = true
+        currencyImage.contentMode = .scaleAspectFit
         return currencyImage
     }()
     
     private lazy var currencyId: UILabel = {
         let currencyId = UILabel()
         currencyId.numberOfLines = 1
-        //тут верно шрифт задается?
         currencyId.font = UIFont.boldSystemFont(ofSize: 16)
         return currencyId
     }()
@@ -69,7 +69,7 @@ final class CurrencyInfoCell: UITableViewCell {
     }
     
     func update(with model: Model) {
-        currencyImage.image = UIImage(named: "\(model.currencyId).pdf")
+        currencyImage.image = model.image
         currencyId.text = String.uppercased(model.currencyId)()
         totalAmount.text = model.totalAmount
         currencyName.text = model.currencyName
@@ -85,10 +85,10 @@ private extension CurrencyInfoCell {
         contentView.addSubview(totalAmount)
         contentView.addSubview(currencyName)
         contentView.addSubview(currencyExchangeRate)
-        setupCurrencyNameLabel()
+        setupCurrencyInfoCell()
     }
     
-    func setupCurrencyNameLabel() {
+    func setupCurrencyInfoCell() {
         currencyImage.translatesAutoresizingMaskIntoConstraints = false
         currencyId.translatesAutoresizingMaskIntoConstraints = false
         totalAmount.translatesAutoresizingMaskIntoConstraints = false
@@ -97,14 +97,18 @@ private extension CurrencyInfoCell {
         NSLayoutConstraint.activate([
             currencyImage.heightAnchor.constraint(equalToConstant: 44),
             currencyImage.widthAnchor.constraint(equalToConstant: 44),
+            currencyImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            currencyImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             currencyImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             currencyId.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: 10),
+            currencyId.topAnchor.constraint(equalTo: currencyImage.topAnchor),
+            totalAmount.topAnchor.constraint(equalTo: currencyImage.topAnchor),
             totalAmount.leadingAnchor.constraint(equalTo: currencyId.trailingAnchor, constant: 20),
-            totalAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            totalAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             currencyName.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: 10),
             currencyName.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor),
             currencyExchangeRate.leadingAnchor.constraint(equalTo: currencyName.trailingAnchor, constant: 20),
-            currencyExchangeRate.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            currencyExchangeRate.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             currencyExchangeRate.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor)
         ])
         currencyId.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
