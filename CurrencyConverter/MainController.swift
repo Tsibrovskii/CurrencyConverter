@@ -139,8 +139,11 @@ extension MainController: CurrencyListViewDelegateProtocol {
         addChild(viewController)
         
         view.addSubview(viewController.view) // проверить туда ли добавляем
-        
+
         // TODO: Тут нужно layout
+        viewController.view.topAnchor...
+        viewController.view.leadingAnchor ...
+        
 //        viewController.view.frame = container.frame
 //        viewController.view.makeEdgesEqualToSuperview()
         viewController.didMove(toParent: self)
