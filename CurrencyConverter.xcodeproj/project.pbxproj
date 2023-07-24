@@ -22,6 +22,7 @@
 		A5D4EC5D2A5AE12900269A82 /* CurrencyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4EC5C2A5AE12900269A82 /* CurrencyInfoCell.swift */; };
 		A5D4EC5F2A5C757000269A82 /* CurrencyListViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4EC5E2A5C757000269A82 /* CurrencyListViewFactory.swift */; };
 		A5D4EC612A64742400269A82 /* BaseCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4EC602A64742400269A82 /* BaseCurrencyViewController.swift */; };
+		A5D4EC632A6EEF3600269A82 /* MainControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4EC622A6EEF3600269A82 /* MainControllerFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		A5D4EC5C2A5AE12900269A82 /* CurrencyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoCell.swift; sourceTree = "<group>"; };
 		A5D4EC5E2A5C757000269A82 /* CurrencyListViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewFactory.swift; sourceTree = "<group>"; };
 		A5D4EC602A64742400269A82 /* BaseCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCurrencyViewController.swift; sourceTree = "<group>"; };
+		A5D4EC622A6EEF3600269A82 /* MainControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */,
 				A5D4EC602A64742400269A82 /* BaseCurrencyViewController.swift */,
 				A57AF0432A3F4C0600448BA0 /* MainController.swift */,
+				A5D4EC622A6EEF3600269A82 /* MainControllerFactory.swift */,
 				A5D4EC5E2A5C757000269A82 /* CurrencyListViewFactory.swift */,
 				8E25732B29FBDCAD0088417B /* Assets.xcassets */,
 				8E25732D29FBDCAD0088417B /* LaunchScreen.storyboard */,
@@ -171,6 +174,7 @@
 				A53F69952A0FAB3600D59289 /* RequestBuilder.swift in Sources */,
 				A57AF0442A3F4C0600448BA0 /* MainController.swift in Sources */,
 				A55971992A1120710059832C /* DeserializeHelper.swift in Sources */,
+				A5D4EC632A6EEF3600269A82 /* MainControllerFactory.swift in Sources */,
 				A5D4EC612A64742400269A82 /* BaseCurrencyViewController.swift in Sources */,
 				A57AF0402A32616F00448BA0 /* CurrencyNameCell.swift in Sources */,
 				8E70354629FBDD0F00DDF4E8 /* CurrencyModels.swift in Sources */,

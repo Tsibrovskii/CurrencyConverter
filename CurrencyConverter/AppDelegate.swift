@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let nav = UINavigationController(rootViewController: MainController())
+        let nav = UINavigationController(rootViewController: MainControllerFactory().create())
         
         let appearance = UINavigationBarAppearance()
         appearance.shadowImage = nil

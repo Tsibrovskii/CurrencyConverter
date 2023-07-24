@@ -42,7 +42,7 @@ final class BaseCurrencyViewController: UIViewController {
     private lazy var amountInput: UITextField = {
         let amountInput = UITextField()
         amountInput.backgroundColor = .green
-        amountInput.delegate = delegate
+        amountInput.delegate = self
         return amountInput
     }()
     
@@ -54,7 +54,6 @@ final class BaseCurrencyViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = .blue
-//        amountInput.delegate = self
         setupSubviews()
     }
 }
@@ -93,10 +92,19 @@ private extension BaseCurrencyViewController {
         ])
     }
 }
-//
-//extension BaseCurrencyViewController: UITextFieldDelegate {
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("hello")
-//        return true
+
+extension BaseCurrencyViewController: UITextFieldDelegate {
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if let x = string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) {
+//            return true
+//        } else {
+//            return false
+//        }
 //    }
-//}
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        delegate?.recalculateTotalAmount(amount: textField.text ?? "")
+        return true
+    }
+}
