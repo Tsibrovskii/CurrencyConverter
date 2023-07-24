@@ -9,7 +9,7 @@ import UIKit
 
 final class MainController: UIViewController {
     
-    private var selectedCurrencies = Set<String>()
+    private var selectedCurrencies = Set<String>() // TODO: на будующее, перейти на сеттинги UserDefault?
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -17,7 +17,7 @@ final class MainController: UIViewController {
         view.delegate = self
         view.dataSource = self
         view.register(CurrencyInfoCell.self, forCellReuseIdentifier: Constants.currencyCellInfo)
-        view.separatorInset = UIEdgeInsets.zero
+        view.separatorInset = .zero
         return view
     }()
     
@@ -131,6 +131,31 @@ extension MainController: CurrencyListViewDelegateProtocol {
     
     enum Constants {
         static let currencyCellInfo = "CurrencyInfoCellId"
+    }
+    
+    
+    func addSubViewController(viewController: UIViewController) {
+
+        addChild(viewController)
+        
+        view.addSubview(viewController.view) // проверить туда ли добавляем
+
+        // TODO: Тут нужно layout
+        viewController.view.topAnchor...
+        viewController.view.leadingAnchor ...
+        
+//        viewController.view.frame = container.frame
+//        viewController.view.makeEdgesEqualToSuperview()
+        viewController.didMove(toParent: self)
+        
+        /* А это для удаления
+        if let current = currentViewController {
+            current.willMove(toParent: nil)
+            current.view.removeFromSuperview()
+            current.removeFromParent()
+            currentViewController = nil
+        }
+        */
     }
     
     func setupSubviews() {
