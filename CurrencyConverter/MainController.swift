@@ -71,6 +71,8 @@ final class MainController: UIViewController {
         defaults.set("sek", forKey: "BaseCurrency")
         let defaultCurrencies = ["usd", "rub", "eur"]
         defaults.set(defaultCurrencies, forKey: "DefaultCurrencies")
+       
+        
         //как с defaults работать? нужен !
         selectedCurrencies = Set<String>(defaults.stringArray(forKey: "DefaultCurrencies")!)
         view.backgroundColor = .orange
@@ -131,12 +133,18 @@ extension MainController: UITableViewDataSource {
         let model = CurrencyInfoCell.Model(
             currencyId: data[indexPath.row].currency,
             currencyName: "united state dollar",
-            totalAmount: String(amountDouble*data[indexPath.row].rate),
+            totalAmount: String(amountDouble * data[indexPath.row].rate),
             currencyExchangeRate: String(data[indexPath.row].rate),
             image: UIImage(named: data[indexPath.row].currency.lowercased()) ?? UIImage()
         )
         cell?.update(with: model)
         return cell ?? UITableViewCell()
+    }
+}
+
+extension MainController: BaseCurrencyViewControllerDelegateProtocol {
+    func recalculateTotalAmount() {
+        <#code#>
     }
 }
 

@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+protocol BaseCurrencyViewControllerDelegateProtocol {
+    func recalculateTotalAmount(....)
+}
+
 final class BaseCurrencyViewController: UIViewController {
     
     struct BaseCurrencyModel {
@@ -15,7 +20,8 @@ final class BaseCurrencyViewController: UIViewController {
         let image: UIImage
     }
     
-    weak var delegate: MainController?
+    weak var delegate: MainController? // TODO: создать протокол и делегат должен иметь его тип
+    
 
     private lazy var currencyImage: UIImageView = {
         let currencyImage = UIImageView()
@@ -43,6 +49,7 @@ final class BaseCurrencyViewController: UIViewController {
         let amountInput = UITextField()
         amountInput.backgroundColor = .green
         amountInput.delegate = self
+        amountInput.keyboardType = .decimalPad
         return amountInput
     }()
     
@@ -95,6 +102,7 @@ private extension BaseCurrencyViewController {
 
 extension BaseCurrencyViewController: UITextFieldDelegate {
     
+    // Для валидации
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //        if let x = string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) {
 //            return true
@@ -102,6 +110,12 @@ extension BaseCurrencyViewController: UITextFieldDelegate {
 //            return false
 //        }
 //    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //
+        
+        xx
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         delegate?.recalculateTotalAmount(amount: textField.text ?? "")
