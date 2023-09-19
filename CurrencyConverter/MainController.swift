@@ -9,16 +9,18 @@ import UIKit
 
 final class MainController: UIViewController {
     
-    private var selectedCurrencies = Set<String>() // TODO: на будующее, перейти на сеттинги UserDefault?
     private let baseCurrencyController: BaseCurrencyViewController
     private let currencyService: ServiceProtocol
     
     private var data: [Exchange.ExchangeRate] = []
     private var amountDouble: Double
     
-    init(currencyService: ServiceProtocol, baseCurrencyController: BaseCurrencyViewController) {
+    private let userSettings: UserSettings
+
+    init(currencyService: ServiceProtocol, baseCurrencyController: BaseCurrencyViewController, userSettings: UserSettings) {
         self.currencyService = currencyService
         self.baseCurrencyController = baseCurrencyController
+        self.userSettings = userSettings
         amountDouble = 1
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,14 +40,10 @@ final class MainController: UIViewController {
     }()
     
     override func viewDidLoad() {
-        let defaults = UserDefaults.standard
-        defaults.set("sek", forKey: "BaseCurrency")
-        let defaultCurrencies = ["usd", "rub", "eur"]
-        defaults.set(defaultCurrencies, forKey: "DefaultCurrencies")
-        selectedCurrencies = Set<String>(defaults.stringArray(forKey: "DefaultCurrencies")!)
         view.backgroundColor = .orange
         
-        currencyService.getExchangeRates(baseCurrency: defaults.string(forKey: "BaseCurrency")!, currencyList: Array(selectedCurrencies)) { [weak self] result in
+        currencyService.getExchangeRates(baseCurrency: userSettings.currentCurrency
+                                         , currencyList: userSettings.currencies) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let exchangeRates):
@@ -152,11 +150,12 @@ extension MainController: CurrencyListViewDelegateProtocol {
     
     func selectionChanged(currencyId: String, isSelected: Bool) {
         if isSelected {
-            selectedCurrencies.insert(currencyId)
+            userSettings.currencies.append(currencyId)
         } else {
-            selectedCurrencies.remove(currencyId)
+            let index = userSettings.currencies.firstIndex(of: currencyId)
+            userSettings.currencies.remove(at: index!)
         }
-        print("selected currencies \(selectedCurrencies)")
+        print("selected currencies \(userSettings.currencies)")
     }
     
     func recalculateTotalAmount(amount: Double?) {
