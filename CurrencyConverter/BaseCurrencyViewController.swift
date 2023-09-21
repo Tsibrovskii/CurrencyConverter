@@ -52,6 +52,7 @@ final class BaseCurrencyViewController: UIViewController {
         amountInput.backgroundColor = .green
         amountInput.delegate = self
         amountInput.keyboardType = .decimalPad
+        amountInput.autocorrectionType = .no
         return amountInput
     }()
     
@@ -149,9 +150,15 @@ extension BaseCurrencyViewController: UITextFieldDelegate {
         view.endEditing(true)
         return false
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+        let updatedText = text.replacingCharacters(in: textRange, with: string)
+            // updatedText - тут текст
+            // TODO: поиграться с текстом который приходит сюда
+            // text и updatedText
+        }
+        return true
+    }
 
-    //а нужно ли это, если клавиатура у нас decimal?
-    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    //        <#code#>
-    //    }
 }
