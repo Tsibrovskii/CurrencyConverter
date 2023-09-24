@@ -12,7 +12,7 @@ class MainControllerFactory {
         MainController(
             currencyService: CurrenciesServiceFactory().create(),
             baseCurrencyController: BaseCurrencyViewController(),
-            userSettings: UserSettings()
+            userSettings: UserSettings.shared
         )
     }
 }

@@ -105,9 +105,10 @@ private extension CurrencyInfoCell {
             totalAmount.topAnchor.constraint(equalTo: currencyImage.topAnchor),
             totalAmount.leadingAnchor.constraint(equalTo: currencyId.trailingAnchor, constant: 20),
             totalAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            totalAmount.widthAnchor.constraint(equalToConstant: 80),
             currencyName.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: 10),
             currencyName.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor),
-            currencyExchangeRate.leadingAnchor.constraint(equalTo: currencyName.trailingAnchor, constant: 20),
+            currencyExchangeRate.leadingAnchor.constraint(equalTo: totalAmount.leadingAnchor),
             currencyExchangeRate.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             currencyExchangeRate.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor)
         ])
