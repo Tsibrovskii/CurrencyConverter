@@ -8,11 +8,6 @@
 import Foundation
 
 final class UserSettings {
-
-    enum defaultKeys {
-        static let defaultCurrencies = "DefaultCurrencies"
-        static let baseCurrency = "BaseCurrency"
-    }
     
     static let shared = UserSettings()
     
@@ -21,18 +16,18 @@ final class UserSettings {
     let defaults = UserDefaults.standard
     var currentCurrency: String {
         get {
-            defaults.string(forKey: defaultKeys.baseCurrency) ?? "SEK"
+            defaults.string(forKey: Constants.baseKey) ?? "SEK"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: defaultKeys.baseCurrency)
+            UserDefaults.standard.set(newValue, forKey: Constants.baseKey)
         }
     }
     var currencies: [String] {
         get {
-            defaults.stringArray(forKey: defaultKeys.defaultCurrencies) ?? ["USD", "RUB", "EUR"]
+            defaults.stringArray(forKey: Constants.selectedCurrenciesKey) ?? ["USD", "RUB", "EUR"]
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: defaultKeys.defaultCurrencies)
+            UserDefaults.standard.set(newValue, forKey: Constants.selectedCurrenciesKey)
         }
     }
 }

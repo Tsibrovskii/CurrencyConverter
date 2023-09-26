@@ -144,6 +144,8 @@ extension MainController: CurrencyListViewDelegateProtocol {
     
     func setupSubviews() {
         baseCurrencyController.delegate = self
+
+
         let model = BaseCurrencyViewController.BaseCurrencyModel(
             currencyId: "sek",
             currencyName: "Swedich krona",
