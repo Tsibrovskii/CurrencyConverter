@@ -14,8 +14,9 @@ final class CurrencyListViewController: UIViewController {
     weak var currencyDelegate: CurrencyListViewDelegateProtocol?
     
     private let currencyService: ServiceProtocol
+    private let userSettings: UserSettings
     private var data: [CurrencyList.CurrencySymbol] = []
-    private var selectedIds: Set<String> = []
+    private var selectedIds: [String] = []
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -26,9 +27,9 @@ final class CurrencyListViewController: UIViewController {
         return view
     }()
     
-    init(currencyService: ServiceProtocol, selectedIds: Set<String>) {
+    init(currencyService: ServiceProtocol, userSettings: UserSettings) {
         self.currencyService = currencyService
-        self.selectedIds = selectedIds
+        self.userSettings = userSettings
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,17 +46,21 @@ final class CurrencyListViewController: UIViewController {
         setupNavigationBar()
         setupSubviews()
         
-        currencyService.getCurrencies() { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let symbols):
-                self.data = symbols
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-                print(error.localizedDescription)
-            }
-        }
+        data = userSettings.currenciesList
+        tableView.reloadData()
+        selectedIds = userSettings.currencies
+        
+//        currencyService.getCurrencies() { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let symbols):
+//                self.data = symbols
+//                self.tableView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//                print(error.localizedDescription)
+//            }
+//        }
     }
 }
 
@@ -70,9 +75,10 @@ extension CurrencyListViewController: UITableViewDelegate {
         isSelected = !isSelected
         
         if isSelected {
-            selectedIds.insert(currencyId)
+            selectedIds.append(currencyId)
         } else {
-            selectedIds.remove(currencyId)
+            let index = selectedIds.firstIndex(of: currencyId)
+            selectedIds.remove(at: index!)
         }
         tableView.reloadData()
         currencyDelegate?.selectionChanged(currencyId: currencyId, isSelected: isSelected)
@@ -128,5 +134,6 @@ private extension CurrencyListViewController {
     func setupNavigationBar() {
         title = "Add Currency"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
     }
 }

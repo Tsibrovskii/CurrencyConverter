@@ -11,7 +11,7 @@ class CurrencyListViewFactory {
     func create() -> CurrencyListViewController {
         CurrencyListViewController(
             currencyService: CurrenciesServiceFactory().create(),
-            selectedIds: []
+            userSettings: UserSettings.shared
         )
     }
 }

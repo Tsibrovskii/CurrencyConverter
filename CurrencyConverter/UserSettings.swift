@@ -8,22 +8,31 @@
 import Foundation
 
 final class UserSettings {
-    private let defaults = UserDefaults.standard
+
+    enum defaultKeys {
+        static let defaultCurrencies = "DefaultCurrencies"
+        static let baseCurrency = "BaseCurrency"
+    }
     
+    static let shared = UserSettings()
+    
+    var currenciesList: [CurrencyList.CurrencySymbol] = []
+
+    let defaults = UserDefaults.standard
     var currentCurrency: String {
         get {
-            defaults.string(forKey: Constants.baseKey) ?? "SEK"
+            defaults.string(forKey: defaultKeys.baseCurrency) ?? "SEK"
         }
         set {
-            defaults.set(newValue, forKey: Constants.baseKey)
+            UserDefaults.standard.set(newValue, forKey: defaultKeys.baseCurrency)
         }
     }
     var currencies: [String] {
         get {
-            defaults.stringArray(forKey: Constants.selectedCurrenciesKey) ?? ["USD", "RUB", "EUR"]
+            defaults.stringArray(forKey: defaultKeys.defaultCurrencies) ?? ["USD", "RUB", "EUR"]
         }
         set {
-            // TODO: обновить настройки
+            UserDefaults.standard.set(newValue, forKey: defaultKeys.defaultCurrencies)
         }
     }
 }

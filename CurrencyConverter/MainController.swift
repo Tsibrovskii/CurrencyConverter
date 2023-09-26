@@ -42,22 +42,26 @@ final class MainController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .orange
         
-        currencyService.getExchangeRates(baseCurrency: userSettings.currentCurrency
-                                         , currencyList: userSettings.currencies) { [weak self] result in
+        currencyService.getCurrencies() { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let exchangeRates):
-                self.data = exchangeRates
-                self.tableView.reloadData()
+            case .success(let symbols):
+                self.userSettings.currenciesList = symbols
             case .failure(let error):
                 print(error)
                 print(error.localizedDescription)
             }
         }
         
+        makeTable()
+        
         setupSubviews()
         setupNavBar()
         addSubViewController(viewController: baseCurrencyController)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        makeTable()
     }
 }
 
@@ -98,9 +102,11 @@ extension MainController: UITableViewDataSource {
             for: indexPath
         ) as? CurrencyInfoCell
         
+        let currencyId = data[indexPath.row].currency
+//        let firstIndex = userSettings.currenciesList.
         let model = CurrencyInfoCell.Model(
-            currencyId: data[indexPath.row].currency,
-            currencyName: "united state dollar",
+            currencyId: currencyId,
+            currencyName: "test",
             totalAmount: String(amountDouble*data[indexPath.row].rate),
             currencyExchangeRate: String(data[indexPath.row].rate),
             image: UIImage(named: data[indexPath.row].currency.lowercased()) ?? UIImage()
@@ -116,6 +122,20 @@ extension MainController: CurrencyListViewDelegateProtocol {
         static let currencyCellInfo = "CurrencyInfoCellId"
     }
     
+    func makeTable() {
+        currencyService.getExchangeRates(baseCurrency: userSettings.currentCurrency
+                                         , currencyList: userSettings.currencies) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let exchangeRates):
+                self.data = exchangeRates
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     func addSubViewController(viewController: UIViewController) {
         addChild(viewController)
