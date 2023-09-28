@@ -7,23 +7,14 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let nav = UINavigationController(rootViewController: MainControllerFactory().create())
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.shadowImage = nil
-        appearance.shadowColor = nil
-        appearance.backgroundColor = .orange
-        
-        nav.navigationBar.standardAppearance = appearance
-        nav.navigationBar.scrollEdgeAppearance = appearance
+        let rootViewController = MainSceneFactory().create()
 
-        window?.rootViewController = nav
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         
         return true
