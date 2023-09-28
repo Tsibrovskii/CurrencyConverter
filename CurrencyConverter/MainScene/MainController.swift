@@ -100,12 +100,14 @@ extension MainController: UITableViewDataSource {
         
         let currencyId = exchangeRateData[indexPath.row].currency
 
+        // TODO: Добавть реальные currencyName
+        
         let model = CurrencyInfoCell.Model(
             currencyId: currencyId,
             currencyName: "test",
             totalAmount: String(amountDouble * exchangeRateData[indexPath.row].rate),
             currencyExchangeRate: String(exchangeRateData[indexPath.row].rate),
-            image: UIImage(named: exchangeRateData[indexPath.row].currency.lowercased()) ?? UIImage()
+            image: UIImage(named: exchangeRateData[indexPath.row].currency.uppercased()) ?? UIImage()
         )
         cell?.update(with: model)
         return cell ?? UITableViewCell()
