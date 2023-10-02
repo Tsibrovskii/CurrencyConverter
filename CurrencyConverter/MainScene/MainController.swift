@@ -59,6 +59,8 @@ final class MainController: UIViewController {
         return view
     }()
     
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     override func viewDidLoad() {
         view.backgroundColor = .orange
         
@@ -99,12 +101,10 @@ extension MainController: UITableViewDataSource {
         ) as? CurrencyInfoCell
         
         let currencyId = exchangeRateData[indexPath.row].currency
-
-        // TODO: Добавть реальные currencyName
         
         let model = CurrencyInfoCell.Model(
             currencyId: currencyId,
-            currencyName: "test",
+            currencyName: currenciesStorage.items.first{ $0.key == currencyId }?.value ?? "",
             totalAmount: String(amountDouble * exchangeRateData[indexPath.row].rate),
             currencyExchangeRate: String(exchangeRateData[indexPath.row].rate),
             image: UIImage(named: exchangeRateData[indexPath.row].currency.uppercased()) ?? UIImage()
@@ -154,10 +154,12 @@ private extension MainController {
     
     func showLoader() {
         loadingView.isHidden = false
+        startLoading()
     }
     
     func hideLoader() {
         loadingView.isHidden = true
+        stopLoading()
     }
     
     func showError() {
@@ -172,13 +174,13 @@ private extension MainController {
         showLoader()
         currencyService.getExchangeRates(baseCurrency: userSettings.currentCurrency, currencyList: userSettings.currencies) { [weak self] result in
             guard let self else { return }
-            hideLoader()
+            self.hideLoader()
             switch result {
             case .success(let exchangeRates):
-                exchangeRateData = exchangeRates
-                tableView.reloadData()
+                self.exchangeRateData = exchangeRates
+                self.tableView.reloadData()
             case .failure(_):
-                showError()
+                self.showError()
             }
         }
     }
@@ -209,26 +211,23 @@ private extension MainController {
         
         requestGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
-            hideLoader()
+            self.hideLoader()
             if let ratesData = try? getExchangeRatesResult?.get(), let currenciesData = try? getCurrenciesResult?.get() {
-                exchangeRateData = ratesData
-                currenciesStorage.items = currenciesData
-                tableView.reloadData()
-                updateBaseCurrencyView()
+                self.exchangeRateData = ratesData
+                self.currenciesStorage.items = currenciesData
+                self.tableView.reloadData()
+                self.updateBaseCurrencyView()
             } else {
-                showError()
+                self.showError()
             }
         }
     }
     
     func updateBaseCurrencyView() {
-        // TODO: currencyId нужно брать уже из настроек
-        // currencyName уже можно брать из currenciesStorage
-        ///
         let model = BaseCurrencyViewController.Model(
-            currencyId: "SEK",
-            currencyName: "Swedich krona",
-            currencyImage: UIImage(named: "SEK") ?? UIImage()
+            currencyId: userSettings.currentCurrency,
+            currencyName: currenciesStorage.items.first{ $0.key == userSettings.currentCurrency }?.value ?? "",
+            currencyImage: UIImage(named: userSettings.currentCurrency) ?? UIImage()
         )
         baseCurrencyController.update(with: model)
     }
@@ -246,11 +245,18 @@ private extension MainController {
         view.addSubview(baseCurrencyView)
         view.addSubview(loadingView)
         view.addSubview(errorView)
+        view.addSubview(activityIndicator)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         baseCurrencyView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         errorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .red
+        activityIndicator.backgroundColor = .orange
+        activityIndicator.layer.cornerRadius = 16
+        activityIndicator.isHidden = true
+        stopLoading()
 
         NSLayoutConstraint.activate([
             baseCurrencyView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
@@ -259,7 +265,11 @@ private extension MainController {
             tableView.topAnchor.constraint(equalTo: baseCurrencyView.bottomAnchor, constant: 10),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 32),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 32)
         ])
         
         [loadingView, errorView].forEach {
@@ -268,6 +278,18 @@ private extension MainController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
+    }
+    
+    func startLoading() {
+        view.bringSubviewToFront(activityIndicator)
+        
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
 }
 
