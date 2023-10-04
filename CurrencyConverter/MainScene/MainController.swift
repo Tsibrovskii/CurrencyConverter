@@ -52,6 +52,8 @@ final class MainController: UIViewController {
         return view
     }()
     
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private lazy var errorView: UIView = {
         let view = UIView()
         view.backgroundColor = .yellow
@@ -59,7 +61,7 @@ final class MainController: UIViewController {
         return view
     }()
     
-    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     
     override func viewDidLoad() {
         view.backgroundColor = .orange
@@ -154,12 +156,12 @@ private extension MainController {
     
     func showLoader() {
         loadingView.isHidden = false
-        startLoading()
+        activityIndicator.startAnimating()
     }
     
     func hideLoader() {
         loadingView.isHidden = true
-        stopLoading()
+        activityIndicator.stopAnimating()
     }
     
     func showError() {
@@ -245,18 +247,15 @@ private extension MainController {
         view.addSubview(baseCurrencyView)
         view.addSubview(loadingView)
         view.addSubview(errorView)
-        view.addSubview(activityIndicator)
+        loadingView.addSubview(activityIndicator)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         baseCurrencyView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         errorView.translatesAutoresizingMaskIntoConstraints = false
+        
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.color = .red
-        activityIndicator.backgroundColor = .orange
-        activityIndicator.layer.cornerRadius = 16
-        activityIndicator.isHidden = true
-        stopLoading()
+        activityIndicator.tintColor = .red
 
         NSLayoutConstraint.activate([
             baseCurrencyView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
@@ -266,10 +265,8 @@ private extension MainController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activityIndicator.heightAnchor.constraint(equalToConstant: 32),
-            activityIndicator.widthAnchor.constraint(equalToConstant: 32)
+            activityIndicator.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor),
         ])
         
         [loadingView, errorView].forEach {
@@ -278,18 +275,6 @@ private extension MainController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
-    }
-    
-    func startLoading() {
-        view.bringSubviewToFront(activityIndicator)
-        
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-    }
-    
-    func stopLoading() {
-        activityIndicator.isHidden = true
-        activityIndicator.stopAnimating()
     }
 }
 
