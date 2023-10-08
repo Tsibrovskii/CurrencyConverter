@@ -97,19 +97,19 @@ private extension CurrencyInfoCell {
         NSLayoutConstraint.activate([
             currencyImage.heightAnchor.constraint(equalToConstant: 44),
             currencyImage.widthAnchor.constraint(equalToConstant: 44),
-            currencyImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            currencyImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            currencyImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            currencyId.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: 10),
+            currencyImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIGrid.padding),
+            currencyImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -UIGrid.padding),
+            currencyImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIGrid.padding),
+            currencyId.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: UIGrid.padding),
             currencyId.topAnchor.constraint(equalTo: currencyImage.topAnchor),
             totalAmount.topAnchor.constraint(equalTo: currencyImage.topAnchor),
-            totalAmount.leadingAnchor.constraint(equalTo: currencyId.trailingAnchor, constant: 20),
-            totalAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            totalAmount.leadingAnchor.constraint(equalTo: currencyId.trailingAnchor, constant: UIGrid.padding),
+            totalAmount.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIGrid.padding),
             totalAmount.widthAnchor.constraint(equalToConstant: 80),
-            currencyName.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: 10),
+            currencyName.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: UIGrid.padding),
             currencyName.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor),
             currencyExchangeRate.leadingAnchor.constraint(equalTo: totalAmount.leadingAnchor),
-            currencyExchangeRate.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            currencyExchangeRate.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIGrid.padding),
             currencyExchangeRate.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor)
         ])
         currencyId.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)

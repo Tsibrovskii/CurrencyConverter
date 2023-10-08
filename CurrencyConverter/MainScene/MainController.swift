@@ -258,13 +258,13 @@ private extension MainController {
         activityIndicator.tintColor = .red
 
         NSLayoutConstraint.activate([
-            baseCurrencyView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            baseCurrencyView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            baseCurrencyView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            tableView.topAnchor.constraint(equalTo: baseCurrencyView.bottomAnchor, constant: 10),
+            baseCurrencyView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIGrid.padding),
+            baseCurrencyView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIGrid.padding),
+            baseCurrencyView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIGrid.padding),
+            tableView.topAnchor.constraint(equalTo: baseCurrencyView.bottomAnchor, constant: UIGrid.padding),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIGrid.padding),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIGrid.padding),
             activityIndicator.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor),
         ])
