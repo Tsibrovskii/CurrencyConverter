@@ -52,7 +52,7 @@ final class MainController: UIViewController {
         return view
     }()
     
-    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .medium)
     
     private lazy var errorView: UIView = {
         let view = UIView()
@@ -104,12 +104,13 @@ extension MainController: UITableViewDataSource {
         
         let currencyId = exchangeRateData[indexPath.row].currency
         
+        let imageName = UIImage(named: exchangeRateData[indexPath.row].currency.uppercased()) != nil ? exchangeRateData[indexPath.row].currency.uppercased() : "default"
         let model = CurrencyInfoCell.Model(
             currencyId: currencyId,
-            currencyName: currenciesStorage.items.first{ $0.key == currencyId }?.value ?? "",
+            currencyName: currenciesStorage.getSymbolName(by: currencyId) ?? "",
             totalAmount: String(amountDouble * exchangeRateData[indexPath.row].rate),
             currencyExchangeRate: String(exchangeRateData[indexPath.row].rate),
-            image: UIImage(named: exchangeRateData[indexPath.row].currency.uppercased()) ?? UIImage()
+            image: UIImage(named: imageName) ?? UIImage()
         )
         cell?.update(with: model)
         return cell ?? UITableViewCell()
@@ -139,8 +140,6 @@ private extension MainController {
     func setupNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(goToCurrenciesList))
         title = "💱 Currencies"
-//        navigationController?.navigationBar.prefersLargeTitles = true
-        //.always почему-то не работает?
         navigationItem.largeTitleDisplayMode = .never
     }
     
@@ -226,10 +225,11 @@ private extension MainController {
     }
     
     func updateBaseCurrencyView() {
+        let imageName = UIImage(named: userSettings.currentCurrency) != nil ? userSettings.currentCurrency : "default"
         let model = BaseCurrencyViewController.Model(
             currencyId: userSettings.currentCurrency,
-            currencyName: currenciesStorage.items.first{ $0.key == userSettings.currentCurrency }?.value ?? "",
-            currencyImage: UIImage(named: userSettings.currentCurrency) ?? UIImage()
+            currencyName: currenciesStorage.getSymbolName(by: userSettings.currentCurrency) ?? "",
+            currencyImage: UIImage(named: imageName) ?? UIImage()
         )
         baseCurrencyController.update(with: model)
     }

@@ -33,7 +33,6 @@ final class CurrenciesStorage: CurrenciesStorageProtocol {
     }
     
     func getSymbolName(by id: String) -> String? {
-        // TODO: написать !!
-        return nil
+        return symbolsMap[id]
     }
 }

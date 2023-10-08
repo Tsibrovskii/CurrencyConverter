@@ -140,17 +140,21 @@ extension BaseCurrencyViewController: UITextFieldDelegate {
         delegate?.recalculateTotalAmount(amount: Double(textField.text ?? "1") ?? 1.0)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        return false
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        delegate?.recalculateTotalAmount(amount: Double(textField.text ?? "1") ?? 1.0)
     }
-    
+
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        view.endEditing(true)
+//        return false
+//    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text, let textRange = Range(range, in: text) {
-        let updatedText = text.replacingCharacters(in: textRange, with: string)
-            // updatedText - тут текст
-            // TODO: поиграться с текстом который приходит сюда
-            // text и updatedText
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            if (updatedText == "") {
+                textField.text = "1"
+            }
         }
         return true
     }
