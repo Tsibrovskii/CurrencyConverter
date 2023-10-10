@@ -152,10 +152,18 @@ extension BaseCurrencyViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text, let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            if (updatedText.isEmpty) {
-                textField.text = "1"
-                return false
+                     
+            print(">>> text \(text)")
+            print(">>> string \(string)")
+            print(">>> updatedText \(updatedText)")
+            
+            var value = Double(updatedText) ?? 1
+            if value <= 0 {
+                value = 1
             }
+            delegate?.recalculateTotalAmount(amount: value)
+           
+            return true
         }
         return true
     }
