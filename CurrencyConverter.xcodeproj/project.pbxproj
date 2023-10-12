@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F10E1382AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F10E1372AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift */; };
 		8E25732329FBDCAC0088417B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25732229FBDCAC0088417B /* AppDelegate.swift */; };
 		8E25732729FBDCAC0088417B /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */; };
 		8E25732C29FBDCAD0088417B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E25732B29FBDCAD0088417B /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F10E1372AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCurrencyViewControllerFactory.swift; sourceTree = "<group>"; };
 		8E25731F29FBDCAC0088417B /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E25732229FBDCAC0088417B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				A5D4EC602A64742400269A82 /* BaseCurrencyViewController.swift */,
 				A57AF0432A3F4C0600448BA0 /* MainController.swift */,
 				A5D4EC622A6EEF3600269A82 /* MainControllerFactory.swift */,
+				4F10E1372AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift */,
 				8E7C379C2AC4202E00D3DC28 /* MainSceneFactory.swift */,
 			);
 			path = MainScene;
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E25732729FBDCAC0088417B /* CurrencyListViewController.swift in Sources */,
+				4F10E1382AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift in Sources */,
 				8E25732329FBDCAC0088417B /* AppDelegate.swift in Sources */,
 				8E7C37A22AC4657400D3DC28 /* CurrenciesStorage.swift in Sources */,
 				A5D4EC5F2A5C757000269A82 /* CurrencyListViewFactory.swift in Sources */,

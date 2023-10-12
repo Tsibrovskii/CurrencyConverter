@@ -11,9 +11,9 @@ final class MainControllerFactory {
     func create() -> MainController {
         MainController(
             currencyService: CurrenciesServiceFactory().create(),
-            baseCurrencyController: BaseCurrencyViewController(),
+            baseCurrencyController: BaseCurrencyViewControllerFactory().create(),
             userSettings: UserSettings(),
-            currenciesStorage: CurrenciesStorage()
+            currenciesStorage: CurrenciesStorage.shared
         )
     }
 }

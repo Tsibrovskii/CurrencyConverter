@@ -15,6 +15,8 @@ protocol CurrenciesStorageProtocol: AnyObject {
 
 final class CurrenciesStorage: CurrenciesStorageProtocol {
     
+    static let shared = CurrenciesStorage()
+    
     private var symbolsMap = [String: String]()
     private var internalItems = [CurrencyList.CurrencySymbol]()
 

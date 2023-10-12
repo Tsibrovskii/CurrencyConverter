@@ -9,6 +9,22 @@ import UIKit
 
 final class BaseCurrencyViewController: UIViewController {
     
+    private let userSettings: UserSettingsProtocol
+    private let currenciesStorage: CurrenciesStorageProtocol
+    
+    init(
+        userSettings: UserSettingsProtocol,
+        currenciesStorage: CurrenciesStorageProtocol
+    ) {
+        self.userSettings = userSettings
+        self.currenciesStorage = currenciesStorage
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     struct Model {
         let currencyId: String
         let currencyName: String
@@ -80,6 +96,9 @@ final class BaseCurrencyViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(updateBaseCurrency))
+        view.addGestureRecognizer(tapGR)
+        view.isUserInteractionEnabled = true
         view.backgroundColor = .blue
         setupSubviews()
         layoutSubviews()
@@ -87,6 +106,15 @@ final class BaseCurrencyViewController: UIViewController {
 }
 
 private extension BaseCurrencyViewController {
+    
+    @objc func updateBaseCurrency() {
+        let vc = CurrencyListViewFactory().create(
+            data: currenciesStorage.items,
+            selectedIds: [userSettings.currentCurrency]
+        )
+        vc.currencyDelegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     func setupSubviews() {
         view.backgroundColor = .brown
@@ -162,5 +190,14 @@ extension BaseCurrencyViewController: UITextFieldDelegate {
             return resultToReturn
         }
         return true
+    }
+}
+
+extension BaseCurrencyViewController: CurrencyListViewDelegateProtocol {
+        
+    func selectionChanged(currencyId: String, isSelected: Bool) {
+        if isSelected {
+            userSettings.currentCurrency = currencyId
+        }
     }
 }
