@@ -81,9 +81,15 @@ final class MainController: UIViewController {
         amountDouble = amount ?? 1.0
         tableView.reloadData()
     }
+    
+    func updateBaseCurrency() {
+        requestConversionRates()
+        updateBaseCurrencyView()
+    }
 }
 
 extension MainController: UITableViewDelegate {
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -175,13 +181,13 @@ private extension MainController {
         showLoader()
         currencyService.getExchangeRates(baseCurrency: userSettings.currentCurrency, currencyList: userSettings.currencies) { [weak self] result in
             guard let self else { return }
-            self.hideLoader()
+            hideLoader()
             switch result {
             case .success(let exchangeRates):
-                self.exchangeRateData = exchangeRates
-                self.tableView.reloadData()
+                exchangeRateData = exchangeRates
+                tableView.reloadData()
             case .failure(_):
-                self.showError()
+                showError()
             }
         }
     }
@@ -212,14 +218,14 @@ private extension MainController {
         
         requestGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
-            self.hideLoader()
+            hideLoader()
             if let ratesData = try? getExchangeRatesResult?.get(), let currenciesData = try? getCurrenciesResult?.get() {
-                self.exchangeRateData = ratesData
-                self.currenciesStorage.items = currenciesData
-                self.tableView.reloadData()
-                self.updateBaseCurrencyView()
+                exchangeRateData = ratesData
+                currenciesStorage.items = currenciesData
+                tableView.reloadData()
+                updateBaseCurrencyView()
             } else {
-                self.showError()
+                showError()
             }
         }
     }

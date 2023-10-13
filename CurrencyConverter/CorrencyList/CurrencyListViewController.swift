@@ -15,6 +15,7 @@ final class CurrencyListViewController: UIViewController {
     
     private let data: [CurrencyList.CurrencySymbol]
     private var selectedIds = Set<String>()
+    private var isMultipleMode = false
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -25,9 +26,14 @@ final class CurrencyListViewController: UIViewController {
         return view
     }()
     
-    init(data: [CurrencyList.CurrencySymbol], selectedIds: [String]) {
+    init(
+        data: [CurrencyList.CurrencySymbol],
+        selectedIds: [String],
+        isMultipleMode: Bool = false
+    ) {
         self.data = data
         self.selectedIds = Set(selectedIds)
+        self.isMultipleMode = isMultipleMode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,6 +54,9 @@ final class CurrencyListViewController: UIViewController {
 extension CurrencyListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        // TODO: какой из режимов single or multiple ?
         
         let currencyId = data[indexPath.row].key
         
@@ -112,7 +121,7 @@ private extension CurrencyListViewController {
     }
     
     func setupNavigationBar() {
-        title = "Add Currency"
+        title = "Add Currency" // TODO: поменять tile в зависимост  от isMultipleMode ?
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .never
     }

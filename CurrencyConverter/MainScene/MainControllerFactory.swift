@@ -8,6 +8,7 @@
 import Foundation
 
 final class MainControllerFactory {
+    
     func create() -> MainController {
         MainController(
             currencyService: CurrenciesServiceFactory().create(),

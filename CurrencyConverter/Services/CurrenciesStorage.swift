@@ -19,6 +19,8 @@ final class CurrenciesStorage: CurrenciesStorageProtocol {
     
     private var symbolsMap = [String: String]()
     private var internalItems = [CurrencyList.CurrencySymbol]()
+    
+    private init() { }
 
     var items: [CurrencyList.CurrencySymbol] {
         get {

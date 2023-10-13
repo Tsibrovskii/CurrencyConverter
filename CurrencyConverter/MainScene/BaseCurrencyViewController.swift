@@ -31,7 +31,7 @@ final class BaseCurrencyViewController: UIViewController {
         let currencyImage: UIImage?
     }
     
-    weak var delegate: MainController?
+    weak var delegate: MainController? // ??? TODO: в протокол
 
     private lazy var labelFrom: UILabel = {
         let labelFrom = UILabel()
@@ -199,5 +199,6 @@ extension BaseCurrencyViewController: CurrencyListViewDelegateProtocol {
         if isSelected {
             userSettings.currentCurrency = currencyId
         }
+        // TODO: обновить view
     }
 }
