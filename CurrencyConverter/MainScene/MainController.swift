@@ -40,8 +40,9 @@ final class MainController: UIViewController {
         view.backgroundColor = .blue
         view.delegate = self
         view.dataSource = self
+        view.tableFooterView = UIView()
+        view.separatorStyle = .none
         view.register(CurrencyInfoCell.self, forCellReuseIdentifier: Constants.currencyCellInfo)
-        view.separatorInset = .zero
         return view
     }()
     
@@ -60,8 +61,7 @@ final class MainController: UIViewController {
         view.isHidden = true
         return view
     }()
-    
-    
+
     
     override func viewDidLoad() {
         view.backgroundColor = .orange
