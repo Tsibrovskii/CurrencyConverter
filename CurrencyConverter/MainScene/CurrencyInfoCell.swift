@@ -53,6 +53,12 @@ final class CurrencyInfoCell: UITableViewCell {
         return currencyExchangeRate
     }()
 
+    private lazy var cellSeparator: UIView = {
+        let cellSeparator = UIView()
+        cellSeparator.backgroundColor = .gray
+        return cellSeparator
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .green
@@ -85,6 +91,7 @@ private extension CurrencyInfoCell {
         contentView.addSubview(totalAmount)
         contentView.addSubview(currencyName)
         contentView.addSubview(currencyExchangeRate)
+        contentView.addSubview(cellSeparator)
         setupCurrencyInfoCell()
     }
     
@@ -94,6 +101,7 @@ private extension CurrencyInfoCell {
         totalAmount.translatesAutoresizingMaskIntoConstraints = false
         currencyName.translatesAutoresizingMaskIntoConstraints = false
         currencyExchangeRate.translatesAutoresizingMaskIntoConstraints = false
+        cellSeparator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             currencyImage.heightAnchor.constraint(equalToConstant: 44),
             currencyImage.widthAnchor.constraint(equalToConstant: 44),
@@ -110,7 +118,11 @@ private extension CurrencyInfoCell {
             currencyName.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor),
             currencyExchangeRate.leadingAnchor.constraint(equalTo: totalAmount.leadingAnchor),
             currencyExchangeRate.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIGrid.padding),
-            currencyExchangeRate.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor)
+            currencyExchangeRate.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor),
+            cellSeparator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cellSeparator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellSeparator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellSeparator.heightAnchor.constraint(equalToConstant: 0.5)
         ])
         currencyId.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
         totalAmount.setContentCompressionResistancePriority(UILayoutPriority(750), for: .horizontal)
