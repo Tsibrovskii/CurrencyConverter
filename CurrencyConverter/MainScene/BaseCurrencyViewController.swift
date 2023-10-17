@@ -31,7 +31,7 @@ final class BaseCurrencyViewController: UIViewController {
         let currencyImage: UIImage?
     }
     
-    weak var delegate: MainController? // ??? TODO: в протокол
+    var delegate: MainControllerProtocol?
 
     private lazy var labelFrom: UILabel = {
         let labelFrom = UILabel()
@@ -110,7 +110,8 @@ private extension BaseCurrencyViewController {
     @objc func updateBaseCurrency() {
         let vc = CurrencyListViewFactory().create(
             data: currenciesStorage.items,
-            selectedIds: [userSettings.currentCurrency]
+            selectedIds: [userSettings.currentCurrency],
+            isMultipleMode: false
         )
         vc.currencyDelegate = self
         navigationController?.pushViewController(vc, animated: true)
@@ -196,9 +197,7 @@ extension BaseCurrencyViewController: UITextFieldDelegate {
 extension BaseCurrencyViewController: CurrencyListViewDelegateProtocol {
         
     func selectionChanged(currencyId: String, isSelected: Bool) {
-        if isSelected {
-            userSettings.currentCurrency = currencyId
-        }
+        userSettings.currentCurrency = currencyId
         // TODO: обновить view
     }
 }

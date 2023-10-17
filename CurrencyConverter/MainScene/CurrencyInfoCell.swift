@@ -122,7 +122,7 @@ private extension CurrencyInfoCell {
             cellSeparator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cellSeparator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cellSeparator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            cellSeparator.heightAnchor.constraint(equalToConstant: 0.5)
+            cellSeparator.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale)
         ])
         currencyId.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
         totalAmount.setContentCompressionResistancePriority(UILayoutPriority(750), for: .horizontal)

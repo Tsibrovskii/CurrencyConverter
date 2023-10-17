@@ -15,7 +15,7 @@ final class CurrencyListViewController: UIViewController {
     
     private let data: [CurrencyList.CurrencySymbol]
     private var selectedIds = Set<String>()
-    private var isMultipleMode = false
+    private var isMultipleMode: Bool
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
@@ -29,7 +29,7 @@ final class CurrencyListViewController: UIViewController {
     init(
         data: [CurrencyList.CurrencySymbol],
         selectedIds: [String],
-        isMultipleMode: Bool = false
+        isMultipleMode: Bool
     ) {
         self.data = data
         self.selectedIds = Set(selectedIds)
@@ -54,20 +54,22 @@ final class CurrencyListViewController: UIViewController {
 extension CurrencyListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        // TODO: какой из режимов single or multiple ?
-        
         let currencyId = data[indexPath.row].key
         
         var isSelected = selectedIds.contains(currencyId)
         
-        isSelected = !isSelected
-        
-        if isSelected {
-            selectedIds.insert(currencyId)
+        if (isMultipleMode) {
+            isSelected = !isSelected
+
+            if isSelected {
+                selectedIds.insert(currencyId)
+            } else {
+                selectedIds.remove(currencyId)
+            }
         } else {
-            selectedIds.remove(currencyId)
+            if (!isSelected) {
+                selectedIds = [currencyId]
+            }
         }
         tableView.reloadData()
         currencyDelegate?.selectionChanged(currencyId: currencyId, isSelected: isSelected)
@@ -121,7 +123,7 @@ private extension CurrencyListViewController {
     }
     
     func setupNavigationBar() {
-        title = "Add Currency" // TODO: поменять tile в зависимост  от isMultipleMode ?
+        title = isMultipleMode ? "Add Currency" : "Select default currency"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .never
     }

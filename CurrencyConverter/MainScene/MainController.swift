@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class MainController: UIViewController {
+protocol MainControllerProtocol {
+    func recalculateTotalAmount(amount: Double?)
+}
+
+final class MainController: UIViewController, MainControllerProtocol {
     
     private let baseCurrencyController: BaseCurrencyViewController
     private let currencyService: CurrencyServiceProtocol
