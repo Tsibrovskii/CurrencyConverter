@@ -20,6 +20,9 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     private var exchangeRateData: [Exchange.ExchangeRate] = []
     private var amountDouble: Double = 1
+    
+    private var beforeUpdateCurrencies: [String] = []
+    private var beforeUpdateBaseCurrency: String = ""
 
     init(
         currencyService: CurrencyServiceProtocol,
@@ -69,6 +72,9 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     override func viewDidLoad() {
         view.backgroundColor = .orange
+        beforeUpdateCurrencies = userSettings.currencies
+        beforeUpdateCurrencies.sort()
+        beforeUpdateBaseCurrency = userSettings.currentCurrency
         
         setupSubviews()
         setupNavBar()
@@ -78,17 +84,12 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestConversionRates()
+        checkChanges()
     }
     
     func recalculateTotalAmount(amount: Double?) {
         amountDouble = amount ?? 1.0
         tableView.reloadData()
-    }
-    
-    func updateBaseCurrency() {
-        requestConversionRates()
-        updateBaseCurrencyView()
     }
 }
 
@@ -145,6 +146,26 @@ private extension MainController {
     
     enum Constants {
         static let currencyCellInfo = "CurrencyInfoCellId"
+    }
+    
+    func checkChanges() {
+        var isSettingsChanged = false
+       
+        var currenciesSorted = userSettings.currencies.map { $0 }
+        currenciesSorted.sort()
+
+        if (beforeUpdateBaseCurrency != userSettings.currentCurrency) {
+            isSettingsChanged = true
+            beforeUpdateBaseCurrency = userSettings.currentCurrency
+        }
+        if (beforeUpdateCurrencies != currenciesSorted) {
+            isSettingsChanged = true
+            beforeUpdateCurrencies = currenciesSorted
+        }
+        if (isSettingsChanged) {
+            requestConversionRates()
+            updateBaseCurrencyView()
+        }
     }
     
     func setupNavBar() {
