@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F10E1382AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F10E1372AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift */; };
+		4FD929982AEFBC3B00672B9A /* CurrenciesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD929972AEFBC3B00672B9A /* CurrenciesMock.swift */; };
 		8E25732329FBDCAC0088417B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25732229FBDCAC0088417B /* AppDelegate.swift */; };
 		8E25732729FBDCAC0088417B /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */; };
 		8E25732C29FBDCAD0088417B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E25732B29FBDCAD0088417B /* Assets.xcassets */; };
@@ -32,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		4F10E1372AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCurrencyViewControllerFactory.swift; sourceTree = "<group>"; };
+		4FD929912AE6835400672B9A /* Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		4FD929942AEE73D500672B9A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4FD929972AEFBC3B00672B9A /* CurrenciesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesMock.swift; sourceTree = "<group>"; };
 		8E25731F29FBDCAC0088417B /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E25732229FBDCAC0088417B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 		8E25731629FBDCAC0088417B = {
 			isa = PBXGroup;
 			children = (
+				4FD929942AEE73D500672B9A /* Release.xcconfig */,
+				4FD929912AE6835400672B9A /* Test.xcconfig */,
 				8E25732129FBDCAC0088417B /* CurrencyConverter */,
 				8E25732029FBDCAC0088417B /* Products */,
 			);
@@ -147,6 +153,7 @@
 				A53F69922A0FA8B700D59289 /* ApiEndpointHelper.swift */,
 				A55971982A1120710059832C /* DeserializeHelper.swift */,
 				A53F69942A0FAB3600D59289 /* RequestBuilder.swift */,
+				4FD929972AEFBC3B00672B9A /* CurrenciesMock.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -241,6 +248,7 @@
 				A55971992A1120710059832C /* DeserializeHelper.swift in Sources */,
 				A5D4EC632A6EEF3600269A82 /* MainControllerFactory.swift in Sources */,
 				A5D4EC612A64742400269A82 /* BaseCurrencyViewController.swift in Sources */,
+				4FD929982AEFBC3B00672B9A /* CurrenciesMock.swift in Sources */,
 				A57AF0402A32616F00448BA0 /* CurrencyNameCell.swift in Sources */,
 				8E70354629FBDD0F00DDF4E8 /* CurrencyModels.swift in Sources */,
 				8E7C37A02AC464D900D3DC28 /* UIGrid.swift in Sources */,
@@ -266,6 +274,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4FD929952AEFBA0F00672B9A /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FD929912AE6835400672B9A /* Test.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Test;
+		};
+		4FD929962AEFBA0F00672B9A /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FD929912AE6835400672B9A /* Test.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VEE97JYMMG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CurrencyConverter/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dmitriy.mi.TestApp1.CurrencyConverter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test;
+		};
 		8E25733129FBDCAD0088417B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -328,6 +426,7 @@
 		};
 		8E25733229FBDCAD0088417B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FD929942AEE73D500672B9A /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -410,6 +509,7 @@
 		};
 		8E25733529FBDCAD0088417B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FD929942AEE73D500672B9A /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -443,6 +543,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E25733129FBDCAD0088417B /* Debug */,
+				4FD929952AEFBA0F00672B9A /* Test */,
 				8E25733229FBDCAD0088417B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -452,6 +553,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E25733429FBDCAD0088417B /* Debug */,
+				4FD929962AEFBA0F00672B9A /* Test */,
 				8E25733529FBDCAD0088417B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

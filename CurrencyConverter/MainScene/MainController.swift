@@ -80,6 +80,9 @@ final class MainController: UIViewController, MainControllerProtocol {
         setupNavBar()
         addSubViewController(viewController: baseCurrencyController)
         requestInitialData()
+        let env = (Bundle.main.infoDictionary?["App Name"] as? String)?
+            .replacingOccurrences(of: "\\", with: "")
+        print("in build \(env)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
