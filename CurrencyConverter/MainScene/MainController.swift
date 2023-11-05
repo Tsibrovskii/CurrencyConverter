@@ -87,7 +87,10 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkChanges()
+        if (isSettingsChanged()) {
+            requestConversionRates()
+            updateBaseCurrencyView()
+        }
     }
     
     func recalculateTotalAmount(amount: Double?) {
@@ -151,24 +154,19 @@ private extension MainController {
         static let currencyCellInfo = "CurrencyInfoCellId"
     }
     
-    func checkChanges() {
-        var isSettingsChanged = false
-       
+    func isSettingsChanged() -> Bool {      
         var currenciesSorted = userSettings.currencies.map { $0 }
         currenciesSorted.sort()
 
         if (beforeUpdateBaseCurrency != userSettings.currentCurrency) {
-            isSettingsChanged = true
             beforeUpdateBaseCurrency = userSettings.currentCurrency
+            return true
         }
         if (beforeUpdateCurrencies != currenciesSorted) {
-            isSettingsChanged = true
             beforeUpdateCurrencies = currenciesSorted
+            return true
         }
-        if (isSettingsChanged) {
-            requestConversionRates()
-            updateBaseCurrencyView()
-        }
+        return false
     }
     
     func setupNavBar() {

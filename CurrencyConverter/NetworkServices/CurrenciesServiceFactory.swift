@@ -7,10 +7,17 @@
 
 final class CurrenciesServiceFactory {
     func create() -> CurrencyServiceProtocol {
-        CurrencyService(
-            apiEnpointHelper: ApiEndpointHelper(),
-            requestBuilder: RequestBuilder(),
-            deserializeHelper: DeserializeHelper()
-        )
+        if (SchemeService().getEnvironment() == "Default") {
+            return CurrencyService(
+                apiEnpointHelper: ApiEndpointHelper(),
+                requestBuilder: RequestBuilder(),
+                deserializeHelper: DeserializeHelper()
+            )
+        } else {
+            return MockCurrencyService(
+                deserializeHelper: DeserializeHelper(),
+                currenciesMock: CurrenciesMock()
+            )
+        }
     }
 }
