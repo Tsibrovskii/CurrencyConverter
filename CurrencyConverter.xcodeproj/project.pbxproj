@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		4F10E1382AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F10E1372AD6EC810069E34C /* BaseCurrencyViewControllerFactory.swift */; };
 		4FD929982AEFBC3B00672B9A /* CurrenciesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD929972AEFBC3B00672B9A /* CurrenciesMock.swift */; };
-		4FD9299A2AF82B4400672B9A /* SchemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD929992AF82B4400672B9A /* SchemeService.swift */; };
 		4FD9299C2AF82C8100672B9A /* MockCurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD9299B2AF82C8100672B9A /* MockCurrencyService.swift */; };
+		4FD929A02AFBC78400672B9A /* EnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD9299F2AFBC78400672B9A /* EnvironmentService.swift */; };
 		8E25732329FBDCAC0088417B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25732229FBDCAC0088417B /* AppDelegate.swift */; };
 		8E25732729FBDCAC0088417B /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */; };
 		8E25732C29FBDCAD0088417B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E25732B29FBDCAD0088417B /* Assets.xcassets */; };
@@ -38,8 +38,8 @@
 		4FD929912AE6835400672B9A /* Offline.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Offline.xcconfig; sourceTree = "<group>"; };
 		4FD929942AEE73D500672B9A /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		4FD929972AEFBC3B00672B9A /* CurrenciesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesMock.swift; sourceTree = "<group>"; };
-		4FD929992AF82B4400672B9A /* SchemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeService.swift; sourceTree = "<group>"; };
 		4FD9299B2AF82C8100672B9A /* MockCurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrencyService.swift; sourceTree = "<group>"; };
+		4FD9299F2AFBC78400672B9A /* EnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentService.swift; sourceTree = "<group>"; };
 		8E25731F29FBDCAC0088417B /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E25732229FBDCAC0088417B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E25732629FBDCAC0088417B /* CurrencyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 			children = (
 				A5654E922AB9C72E00AC76D1 /* UserSettings.swift */,
 				8E7C37A12AC4657400D3DC28 /* CurrenciesStorage.swift */,
-				4FD929992AF82B4400672B9A /* SchemeService.swift */,
+				4FD9299F2AFBC78400672B9A /* EnvironmentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -250,10 +250,10 @@
 				A5D4EC5F2A5C757000269A82 /* CurrencyListViewFactory.swift in Sources */,
 				A53F69932A0FA8B700D59289 /* ApiEndpointHelper.swift in Sources */,
 				A53F69952A0FAB3600D59289 /* RequestBuilder.swift in Sources */,
+				4FD929A02AFBC78400672B9A /* EnvironmentService.swift in Sources */,
 				A57AF0442A3F4C0600448BA0 /* MainController.swift in Sources */,
 				A55971992A1120710059832C /* DeserializeHelper.swift in Sources */,
 				A5D4EC632A6EEF3600269A82 /* MainControllerFactory.swift in Sources */,
-				4FD9299A2AF82B4400672B9A /* SchemeService.swift in Sources */,
 				A5D4EC612A64742400269A82 /* BaseCurrencyViewController.swift in Sources */,
 				4FD929982AEFBC3B00672B9A /* CurrenciesMock.swift in Sources */,
 				A57AF0402A32616F00448BA0 /* CurrencyNameCell.swift in Sources */,
