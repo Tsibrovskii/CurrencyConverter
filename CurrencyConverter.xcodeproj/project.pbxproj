@@ -79,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4FD929A52AFBCD1B00672B9A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FD929A12AFBC7DB00672B9A /* CurrenciesMock.json */,
+				4FD929A32AFBC83700672B9A /* ExchangeRatesMock.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8E25731629FBDCAC0088417B = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +109,7 @@
 		8E25732129FBDCAC0088417B /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				4FD929A52AFBCD1B00672B9A /* Resources */,
 				8E7C379E2AC464BB00D3DC28 /* UI */,
 				8E9B80992AC35D7000680067 /* Models */,
 				8E9B809A2AC35D9300680067 /* NetworkServices */,
@@ -163,8 +173,6 @@
 				A55971982A1120710059832C /* DeserializeHelper.swift */,
 				A53F69942A0FAB3600D59289 /* RequestBuilder.swift */,
 				4FD929972AEFBC3B00672B9A /* CurrenciesMock.swift */,
-				4FD929A12AFBC7DB00672B9A /* CurrenciesMock.json */,
-				4FD929A32AFBC83700672B9A /* ExchangeRatesMock.json */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
