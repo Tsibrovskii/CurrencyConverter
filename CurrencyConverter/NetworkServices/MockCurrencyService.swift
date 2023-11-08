@@ -7,6 +7,8 @@
 
 import Foundation
 
+// TODO: я бы все же назвал Demo/Offline CurrencyService
+
 final class MockCurrencyService: CurrencyServiceProtocol {
     
     private let deserializeHelper: DeserializeHelper

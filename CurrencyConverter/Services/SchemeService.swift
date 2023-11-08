@@ -7,7 +7,21 @@
 
 import Foundation
 
+
+// TODO: EnvironmentService лучше название
+
 protocol SchemeServiceProtocol {
+    
+    // TODO: тут лучше сделать property аля
+    // var runEnvironment: String {
+    //    .....
+    // }
+    // а потом еще
+    // var isOfflineEnvironment: Bool {
+    //    ....
+    // }
+    
+    //
     func getEnvironment() -> String
 }
 
