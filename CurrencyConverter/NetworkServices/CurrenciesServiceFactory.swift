@@ -7,7 +7,7 @@
 
 final class CurrenciesServiceFactory {
     func create() -> CurrencyServiceProtocol {
-        if (SchemeService().getEnvironment() == "Default") {
+        if (!EnvironmentService().isOfflineEnvironment) {
             return CurrencyService(
                 apiEnpointHelper: ApiEndpointHelper(),
                 requestBuilder: RequestBuilder(),
