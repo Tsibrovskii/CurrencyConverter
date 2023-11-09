@@ -14,9 +14,8 @@ final class CurrenciesServiceFactory {
                 deserializeHelper: DeserializeHelper()
             )
         } else {
-            return MockCurrencyService(
-                deserializeHelper: DeserializeHelper(),
-                currenciesMock: CurrenciesMock()
+            return OfflineCurrencyService(
+                deserializeHelper: DeserializeHelper()
             )
         }
     }

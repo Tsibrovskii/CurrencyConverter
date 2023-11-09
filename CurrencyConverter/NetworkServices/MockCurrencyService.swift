@@ -7,16 +7,12 @@
 
 import Foundation
 
-// TODO: я бы все же назвал Demo/Offline CurrencyService
-
-final class MockCurrencyService: CurrencyServiceProtocol {
+final class OfflineCurrencyService: CurrencyServiceProtocol {
     
     private let deserializeHelper: DeserializeHelper
-    private let currenciesMock: CurrenciesMock
 
-    init(deserializeHelper: DeserializeHelper, currenciesMock: CurrenciesMock) {
+    init(deserializeHelper: DeserializeHelper) {
         self.deserializeHelper = deserializeHelper
-        self.currenciesMock = currenciesMock
     }
 
     func getCurrencies(completion: @escaping (Result<[CurrencyList.CurrencySymbol], SerivceError>) -> Void) {
@@ -52,7 +48,19 @@ final class MockCurrencyService: CurrencyServiceProtocol {
     }
 
     func getExchangeRates(baseCurrency: String, currencyList: [String], completion: @escaping (Result<[Exchange.ExchangeRate], SerivceError>) -> Void) {
-        let rates = self.deserializeHelper.deserializeData(dataRaw: currenciesMock.getCurrenciesExchangeRates.data(using: .utf8), type: Exchange.ExchangeRatesList.self)
+        guard let contentPath = Bundle.main.url(forResource: "ExchangeRatesMock", withExtension: "json")
+        else {
+            completion(.failure(SerivceError.failureResult))
+            return
+        }
+        
+        guard let content = try? Data(contentsOf: contentPath)
+        else {
+            completion(.failure(SerivceError.failureResult))
+            return
+        }
+
+        let rates = self.deserializeHelper.deserializeData(dataRaw: content, type: Exchange.ExchangeRatesList.self)
         var ratesResult: Exchange.ExchangeRatesList
         switch rates {
         case .failure(let serviceError):
