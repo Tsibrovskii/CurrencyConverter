@@ -21,14 +21,12 @@ final class MockCurrencyService: CurrencyServiceProtocol {
 
     func getCurrencies(completion: @escaping (Result<[CurrencyList.CurrencySymbol], SerivceError>) -> Void) {
         print("getCurrencies mock")
-        guard let contentPath = Bundle.main.url(forResource: "CurrenciesMock", withExtension: "json")
-        else {
+        guard let contentPath = Bundle.main.url(forResource: "CurrenciesMock", withExtension: "json") else {
             completion(.failure(SerivceError.failureResult))
             return
         }
         
-        guard let content = try? Data(contentsOf: contentPath)
-        else {
+        guard let content = try? Data(contentsOf: contentPath) else {
             completion(.failure(SerivceError.failureResult))
             return
         }
