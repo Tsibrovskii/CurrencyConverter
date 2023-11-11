@@ -33,11 +33,18 @@ final class BaseCurrencyViewController: UIViewController {
     
     var delegate: MainControllerProtocol?
 
+    private lazy var mainView: UIView = {
+        let mainView = UIView()
+        mainView.backgroundColor = .blue
+        mainView.layer.cornerRadius = 8
+        return mainView
+    }()
+
     private lazy var labelFrom: UILabel = {
         let labelFrom = UILabel()
         labelFrom.text = "From:"
         labelFrom.font = UIFont.boldSystemFont(ofSize: 16)
-        labelFrom.textColor = .white
+        labelFrom.textColor = .gray
         return labelFrom
     }()
     
@@ -45,7 +52,7 @@ final class BaseCurrencyViewController: UIViewController {
         let labelTo = UILabel()
         labelTo.text = "To:"
         labelTo.font = UIFont.boldSystemFont(ofSize: 16)
-        labelTo.textColor = .white
+        labelTo.textColor = .gray
         return labelTo
     }()
 
@@ -79,10 +86,12 @@ final class BaseCurrencyViewController: UIViewController {
         amountInput.delegate = self
         amountInput.keyboardType = .decimalPad
         amountInput.autocorrectionType = .no
+        amountInput.layer.cornerRadius = 8
         return amountInput
     }()
         
     private lazy var views = [
+        mainView,
         labelFrom,
         currencyImage,
         currencyId,
@@ -101,7 +110,6 @@ final class BaseCurrencyViewController: UIViewController {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(updateBaseCurrency))
         view.addGestureRecognizer(tapGR)
         view.isUserInteractionEnabled = true
-        view.backgroundColor = .blue
         setupSubviews()
         layoutSubviews()
     }
@@ -120,8 +128,6 @@ private extension BaseCurrencyViewController {
     }
     
     func setupSubviews() {
-        view.backgroundColor = .blue
-        
         views.forEach { view.addSubview($0) }
         
         setupToolbar()
@@ -133,9 +139,13 @@ private extension BaseCurrencyViewController {
         NSLayoutConstraint.activate([
             labelFrom.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             labelFrom.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIGrid.padding),
+            mainView.topAnchor.constraint(equalTo: labelFrom.bottomAnchor, constant: UIGrid.padding),
+            mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             currencyImage.heightAnchor.constraint(equalToConstant: 36),
             currencyImage.widthAnchor.constraint(equalToConstant: 44),
-            currencyImage.topAnchor.constraint(equalTo: labelFrom.bottomAnchor, constant: UIGrid.padding),
+            currencyImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 8),
+            currencyImage.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -8),
             currencyImage.leadingAnchor.constraint(equalTo: labelFrom.leadingAnchor),
             currencyId.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: UIGrid.padding),
             currencyId.topAnchor.constraint(equalTo: currencyImage.topAnchor),
@@ -144,7 +154,7 @@ private extension BaseCurrencyViewController {
             amountInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIGrid.padding),
             amountInput.centerYAnchor.constraint(equalTo: currencyImage.centerYAnchor),
             amountInput.widthAnchor.constraint(equalToConstant: 100),
-            labelTo.topAnchor.constraint(equalTo: currencyImage.bottomAnchor, constant: UIGrid.padding),
+            labelTo.topAnchor.constraint(equalTo: mainView.bottomAnchor, constant: UIGrid.padding),
             labelTo.leadingAnchor.constraint(equalTo: labelFrom.leadingAnchor),
             labelTo.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
