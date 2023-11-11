@@ -19,7 +19,7 @@ final class CurrencyInfoCell: UITableViewCell {
     
     private lazy var currencyImage: UIImageView = {
         let currencyImage = UIImageView()
-        currencyImage.layer.cornerRadius = 16
+        currencyImage.layer.cornerRadius = 8
         currencyImage.clipsToBounds = true
         currencyImage.contentMode = .scaleAspectFit
         return currencyImage
@@ -61,7 +61,7 @@ final class CurrencyInfoCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .green
+        contentView.backgroundColor = .white
         setupSubviews()
     }
     
@@ -103,7 +103,7 @@ private extension CurrencyInfoCell {
         currencyExchangeRate.translatesAutoresizingMaskIntoConstraints = false
         cellSeparator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            currencyImage.heightAnchor.constraint(equalToConstant: 44),
+            currencyImage.heightAnchor.constraint(equalToConstant: 36),
             currencyImage.widthAnchor.constraint(equalToConstant: 44),
             currencyImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIGrid.padding),
             currencyImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -UIGrid.padding),

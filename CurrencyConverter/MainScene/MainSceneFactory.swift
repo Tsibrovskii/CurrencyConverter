@@ -16,7 +16,7 @@ final class MainSceneFactory {
         let appearance = UINavigationBarAppearance()
         appearance.shadowImage = nil
         appearance.shadowColor = nil
-        appearance.backgroundColor = .orange
+        appearance.backgroundColor = .white
         
         nav.navigationBar.standardAppearance = appearance
         nav.navigationBar.scrollEdgeAppearance = appearance

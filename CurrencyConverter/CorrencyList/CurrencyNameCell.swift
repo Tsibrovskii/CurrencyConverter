@@ -17,13 +17,13 @@ final class CurrencyNameCell: UITableViewCell {
     
     private lazy var currencyNameLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .green
+        label.backgroundColor = .white
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .yellow
+        contentView.backgroundColor = .white
         setupSubviews()
     }
     

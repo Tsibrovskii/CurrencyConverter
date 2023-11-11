@@ -44,7 +44,7 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
         view.delegate = self
         view.dataSource = self
         view.tableFooterView = UIView()
@@ -71,7 +71,7 @@ final class MainController: UIViewController, MainControllerProtocol {
 
     
     override func viewDidLoad() {
-        view.backgroundColor = .orange
+        view.backgroundColor = .white
         beforeUpdateCurrencies = userSettings.currencies
         beforeUpdateCurrencies.sort()
         beforeUpdateBaseCurrency = userSettings.currentCurrency
@@ -80,9 +80,6 @@ final class MainController: UIViewController, MainControllerProtocol {
         setupNavBar()
         addSubViewController(viewController: baseCurrencyController)
         requestInitialData()
-        let env = (Bundle.main.infoDictionary?["App Name"] as? String)?
-            .replacingOccurrences(of: "\\", with: "")
-        print("in build \(env)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -273,7 +270,6 @@ private extension MainController {
     
     func setupSubviews() {
         baseCurrencyController.delegate = self
-        
         let baseCurrencyView: UIView = baseCurrencyController.view
         view.addSubview(tableView)
         view.addSubview(baseCurrencyView)

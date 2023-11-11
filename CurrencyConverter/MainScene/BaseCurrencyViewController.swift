@@ -37,7 +37,7 @@ final class BaseCurrencyViewController: UIViewController {
         let labelFrom = UILabel()
         labelFrom.text = "From:"
         labelFrom.font = UIFont.boldSystemFont(ofSize: 16)
-        labelFrom.textColor = .black
+        labelFrom.textColor = .white
         return labelFrom
     }()
     
@@ -45,13 +45,13 @@ final class BaseCurrencyViewController: UIViewController {
         let labelTo = UILabel()
         labelTo.text = "To:"
         labelTo.font = UIFont.boldSystemFont(ofSize: 16)
-        labelTo.textColor = .black
+        labelTo.textColor = .white
         return labelTo
     }()
 
     private lazy var currencyImage: UIImageView = {
         let currencyImage = UIImageView()
-        currencyImage.layer.cornerRadius = 16
+        currencyImage.layer.cornerRadius = 8
         currencyImage.clipsToBounds = true
         currencyImage.contentMode = .scaleAspectFit
         return currencyImage
@@ -61,6 +61,7 @@ final class BaseCurrencyViewController: UIViewController {
         let currencyId = UILabel()
         currencyId.numberOfLines = 1
         currencyId.font = UIFont.boldSystemFont(ofSize: 16)
+        currencyId.textColor = .white
         return currencyId
     }()
     
@@ -68,12 +69,13 @@ final class BaseCurrencyViewController: UIViewController {
         let currencyName = UILabel()
         currencyName.numberOfLines = 1
         currencyName.font = currencyName.font.withSize(12)
+        currencyName.textColor = .white
         return currencyName
     }()
     
     private lazy var amountInput: UITextField = {
         let amountInput = UITextField()
-        amountInput.backgroundColor = .green
+        amountInput.backgroundColor = .white
         amountInput.delegate = self
         amountInput.keyboardType = .decimalPad
         amountInput.autocorrectionType = .no
@@ -118,7 +120,7 @@ private extension BaseCurrencyViewController {
     }
     
     func setupSubviews() {
-        view.backgroundColor = .brown
+        view.backgroundColor = .blue
         
         views.forEach { view.addSubview($0) }
         
@@ -131,7 +133,7 @@ private extension BaseCurrencyViewController {
         NSLayoutConstraint.activate([
             labelFrom.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             labelFrom.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIGrid.padding),
-            currencyImage.heightAnchor.constraint(equalToConstant: 44),
+            currencyImage.heightAnchor.constraint(equalToConstant: 36),
             currencyImage.widthAnchor.constraint(equalToConstant: 44),
             currencyImage.topAnchor.constraint(equalTo: labelFrom.bottomAnchor, constant: UIGrid.padding),
             currencyImage.leadingAnchor.constraint(equalTo: labelFrom.leadingAnchor),
@@ -198,6 +200,5 @@ extension BaseCurrencyViewController: CurrencyListViewDelegateProtocol {
         
     func selectionChanged(currencyId: String, isSelected: Bool) {
         userSettings.currentCurrency = currencyId
-        // TODO: обновить view
     }
 }

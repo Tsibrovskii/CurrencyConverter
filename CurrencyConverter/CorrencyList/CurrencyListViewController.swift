@@ -19,7 +19,7 @@ final class CurrencyListViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let view = UITableView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
         view.delegate = self
         view.dataSource = self
         view.register(CurrencyNameCell.self, forCellReuseIdentifier: Constants.currencyCellId)
