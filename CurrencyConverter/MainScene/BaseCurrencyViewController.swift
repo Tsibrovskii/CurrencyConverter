@@ -86,7 +86,7 @@ final class BaseCurrencyViewController: UIViewController {
         amountInput.delegate = self
         amountInput.keyboardType = .decimalPad
         amountInput.autocorrectionType = .no
-        amountInput.layer.cornerRadius = 8
+        amountInput.layer.cornerRadius = 4
         return amountInput
     }()
         

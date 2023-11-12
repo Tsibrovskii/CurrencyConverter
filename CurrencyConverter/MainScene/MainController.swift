@@ -55,7 +55,7 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     private lazy var loadingView: UIView = {
         let view = UIView()
-        view.backgroundColor = .yellow
+        view.backgroundColor = .white
         view.isHidden = true
         return view
     }()
@@ -64,12 +64,29 @@ final class MainController: UIViewController, MainControllerProtocol {
     
     private lazy var errorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .yellow
+        view.backgroundColor = .white
         view.isHidden = true
         return view
     }()
-
     
+    private lazy var errorMessage: UILabel = {
+        let labelErrorMessage = UILabel()
+        labelErrorMessage.text = "Something got wrong. Please try again later."
+        labelErrorMessage.textColor = .gray
+        labelErrorMessage.isHidden = true
+        return labelErrorMessage
+    }()
+
+    private lazy var tryAgainButton: UIButton = {
+        let tryAgainButton = UIButton()
+        tryAgainButton.setTitle("Try again", for: .normal)
+        tryAgainButton.backgroundColor = .blue
+        tryAgainButton.isHidden = true
+        tryAgainButton.layer.cornerRadius = 8
+        tryAgainButton.addTarget(self, action: #selector(self.tryAgain), for: .touchUpInside)
+        return tryAgainButton
+    }()
+
     override func viewDidLoad() {
         view.backgroundColor = .white
         beforeUpdateCurrencies = userSettings.currencies
@@ -182,6 +199,11 @@ private extension MainController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func tryAgain() {
+        hideError()
+        requestInitialData()
+    }
+
     func showLoader() {
         loadingView.isHidden = false
         activityIndicator.startAnimating()
@@ -194,10 +216,14 @@ private extension MainController {
     
     func showError() {
         errorView.isHidden = false
+        errorMessage.isHidden = false
+        tryAgainButton.isHidden = false
     }
     
     func hideError() {
         errorView.isHidden = true
+        errorMessage.isHidden = true
+        tryAgainButton.isHidden = true
     }
     
     func requestConversionRates() {
@@ -275,12 +301,16 @@ private extension MainController {
         view.addSubview(baseCurrencyView)
         view.addSubview(loadingView)
         view.addSubview(errorView)
+        view.addSubview(errorMessage)
+        view.addSubview(tryAgainButton)
         loadingView.addSubview(activityIndicator)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         baseCurrencyView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         errorView.translatesAutoresizingMaskIntoConstraints = false
+        errorMessage.translatesAutoresizingMaskIntoConstraints = false
+        tryAgainButton.translatesAutoresizingMaskIntoConstraints = false
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.tintColor = .red
@@ -303,6 +333,10 @@ private extension MainController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
+        errorMessage.centerXAnchor.constraint(equalTo: errorView.centerXAnchor).isActive = true
+        errorMessage.centerYAnchor.constraint(equalTo: errorView.centerYAnchor).isActive = true
+        tryAgainButton.centerXAnchor.constraint(equalTo: errorView.centerXAnchor).isActive = true
+        tryAgainButton.bottomAnchor.constraint(equalTo: errorView.bottomAnchor, constant: -UIGrid.padding).isActive = true
     }
 }
 
