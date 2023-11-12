@@ -207,23 +207,27 @@ private extension MainController {
     func showLoader() {
         loadingView.isHidden = false
         activityIndicator.startAnimating()
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func hideLoader() {
         loadingView.isHidden = true
         activityIndicator.stopAnimating()
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     func showError() {
         errorView.isHidden = false
         errorMessage.isHidden = false
         tryAgainButton.isHidden = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func hideError() {
         errorView.isHidden = true
         errorMessage.isHidden = true
         tryAgainButton.isHidden = true
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     func requestConversionRates() {
