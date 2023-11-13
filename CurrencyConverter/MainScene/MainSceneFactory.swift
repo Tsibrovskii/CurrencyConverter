@@ -20,6 +20,7 @@ final class MainSceneFactory {
         
         nav.navigationBar.standardAppearance = appearance
         nav.navigationBar.scrollEdgeAppearance = appearance
+        nav.navigationBar.isTranslucent = false
         
         return nav
     }
