@@ -27,7 +27,7 @@ final class CurrenciesStorage: CurrenciesStorageProtocol {
             internalItems
         }
         set {
-            internalItems = newValue.sorted { $0.key > $1.key }
+            internalItems = newValue.sorted { $0.key < $1.key }
             
             symbolsMap.removeAll(keepingCapacity: true)
             newValue.forEach {
