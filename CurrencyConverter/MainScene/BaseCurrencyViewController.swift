@@ -36,7 +36,7 @@ final class BaseCurrencyViewController: UIViewController {
     private lazy var mainView: UIView = {
         let mainView = UIView()
         mainView.backgroundColor = .blue
-        mainView.layer.cornerRadius = 8
+//        mainView.layer.cornerRadius = 8
         return mainView
     }()
 
@@ -67,7 +67,7 @@ final class BaseCurrencyViewController: UIViewController {
     private lazy var currencyId: UILabel = {
         let currencyId = UILabel()
         currencyId.numberOfLines = 1
-        currencyId.font = UIFont.boldSystemFont(ofSize: 16)
+        currencyId.font = UIFont.boldSystemFont(ofSize: 14)
         currencyId.textColor = .white
         return currencyId
     }()
@@ -143,7 +143,7 @@ private extension BaseCurrencyViewController {
             mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             currencyImage.heightAnchor.constraint(equalToConstant: 36),
-            currencyImage.widthAnchor.constraint(equalToConstant: 44),
+            currencyImage.widthAnchor.constraint(equalTo: currencyImage.heightAnchor, multiplier: 1.4),
             currencyImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 8),
             currencyImage.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -8),
             currencyImage.leadingAnchor.constraint(equalTo: labelFrom.leadingAnchor),
@@ -156,7 +156,7 @@ private extension BaseCurrencyViewController {
             amountInput.widthAnchor.constraint(equalToConstant: 100),
             labelTo.topAnchor.constraint(equalTo: mainView.bottomAnchor, constant: UIGrid.padding),
             labelTo.leadingAnchor.constraint(equalTo: labelFrom.leadingAnchor),
-            labelTo.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            labelTo.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 

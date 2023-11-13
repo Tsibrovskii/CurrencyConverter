@@ -28,13 +28,15 @@ final class CurrencyInfoCell: UITableViewCell {
     private lazy var currencyId: UILabel = {
         let currencyId = UILabel()
         currencyId.numberOfLines = 1
-        currencyId.font = UIFont.boldSystemFont(ofSize: 16)
+        currencyId.font = UIFont.boldSystemFont(ofSize: 14)
         return currencyId
     }()
     
     private var totalAmount: UILabel = {
         let totalAmount = UILabel()
         totalAmount.numberOfLines = 1
+        totalAmount.font = totalAmount.font.withSize(14)
+        totalAmount.textAlignment = .right
         return totalAmount
     }()
     
@@ -49,7 +51,9 @@ final class CurrencyInfoCell: UITableViewCell {
     private var currencyExchangeRate: UILabel = {
        let currencyExchangeRate = UILabel()
         currencyExchangeRate.numberOfLines = 1
+        currencyExchangeRate.font = currencyExchangeRate.font.withSize(14)
         currencyExchangeRate.textColor = .gray
+        currencyExchangeRate.textAlignment = .right
         return currencyExchangeRate
     }()
 
@@ -104,7 +108,7 @@ private extension CurrencyInfoCell {
         cellSeparator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             currencyImage.heightAnchor.constraint(equalToConstant: 36),
-            currencyImage.widthAnchor.constraint(equalToConstant: 44),
+            currencyImage.widthAnchor.constraint(equalTo: currencyImage.heightAnchor, multiplier: 1.4),
             currencyImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIGrid.padding),
             currencyImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -UIGrid.padding),
             currencyImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIGrid.padding),

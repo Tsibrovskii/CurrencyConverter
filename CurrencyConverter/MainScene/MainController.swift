@@ -73,7 +73,6 @@ final class MainController: UIViewController, MainControllerProtocol {
         let labelErrorMessage = UILabel()
         labelErrorMessage.text = "Something got wrong. Please try again later."
         labelErrorMessage.textColor = .gray
-        labelErrorMessage.isHidden = true
         return labelErrorMessage
     }()
 
@@ -81,7 +80,6 @@ final class MainController: UIViewController, MainControllerProtocol {
         let tryAgainButton = UIButton()
         tryAgainButton.setTitle("Try again", for: .normal)
         tryAgainButton.backgroundColor = .blue
-        tryAgainButton.isHidden = true
         tryAgainButton.layer.cornerRadius = 8
         tryAgainButton.addTarget(self, action: #selector(self.tryAgain), for: .touchUpInside)
         return tryAgainButton
@@ -218,15 +216,11 @@ private extension MainController {
     
     func showError() {
         errorView.isHidden = false
-        errorMessage.isHidden = false
-        tryAgainButton.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func hideError() {
         errorView.isHidden = true
-        errorMessage.isHidden = true
-        tryAgainButton.isHidden = true
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
@@ -305,8 +299,8 @@ private extension MainController {
         view.addSubview(baseCurrencyView)
         view.addSubview(loadingView)
         view.addSubview(errorView)
-        view.addSubview(errorMessage)
-        view.addSubview(tryAgainButton)
+        errorView.addSubview(errorMessage)
+        errorView.addSubview(tryAgainButton)
         loadingView.addSubview(activityIndicator)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
