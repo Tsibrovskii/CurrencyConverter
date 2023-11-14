@@ -36,7 +36,6 @@ final class BaseCurrencyViewController: UIViewController {
     private lazy var mainView: UIView = {
         let mainView = UIView()
         mainView.backgroundColor = .blue
-//        mainView.layer.cornerRadius = 8
         return mainView
     }()
 
@@ -58,7 +57,6 @@ final class BaseCurrencyViewController: UIViewController {
 
     private lazy var currencyImage: UIImageView = {
         let currencyImage = UIImageView()
-        currencyImage.layer.cornerRadius = 8
         currencyImage.clipsToBounds = true
         currencyImage.contentMode = .scaleAspectFit
         return currencyImage
@@ -86,7 +84,6 @@ final class BaseCurrencyViewController: UIViewController {
         amountInput.delegate = self
         amountInput.keyboardType = .decimalPad
         amountInput.autocorrectionType = .no
-        amountInput.layer.cornerRadius = 4
         return amountInput
     }()
         
@@ -98,6 +95,12 @@ final class BaseCurrencyViewController: UIViewController {
         currencyName,
         amountInput,
         labelTo
+    ]
+
+    private lazy var cornerViews = [
+        mainView,
+        currencyImage,
+        amountInput
     ]
 
     func update(with model: Model) {
@@ -112,6 +115,13 @@ final class BaseCurrencyViewController: UIViewController {
         view.isUserInteractionEnabled = true
         setupSubviews()
         layoutSubviews()
+    }
+
+    override func viewDidLayoutSubviews() {
+        cornerViews.forEach{
+            $0.layer.cornerRadius = 0.188 * min($0.frame.width, $0.frame.height)
+            $0.layer.masksToBounds = true
+        }
     }
 }
 
