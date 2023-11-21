@@ -162,12 +162,16 @@ private extension BaseCurrencyViewController {
             currencyName.leadingAnchor.constraint(equalTo: currencyImage.trailingAnchor, constant: UIGrid.padding),
             currencyName.bottomAnchor.constraint(equalTo: currencyImage.bottomAnchor),
             amountInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIGrid.padding),
+            amountInput.leadingAnchor.constraint(equalTo: currencyName.trailingAnchor, constant: UIGrid.padding),
             amountInput.centerYAnchor.constraint(equalTo: currencyImage.centerYAnchor),
             amountInput.widthAnchor.constraint(equalToConstant: 100),
             labelTo.topAnchor.constraint(equalTo: mainView.bottomAnchor, constant: UIGrid.padding),
             labelTo.leadingAnchor.constraint(equalTo: labelFrom.leadingAnchor),
             labelTo.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+
+        currencyName.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
+        amountInput.setContentCompressionResistancePriority(UILayoutPriority(750), for: .horizontal)
     }
 
     func setupToolbar() {
