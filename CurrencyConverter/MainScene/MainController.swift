@@ -137,8 +137,8 @@ extension MainController: UITableViewDataSource {
         let model = CurrencyInfoCell.Model(
             currencyId: currencyId,
             currencyName: currenciesStorage.getSymbolName(by: currencyId) ?? "",
-            totalAmount: String(amountDouble * exchangeRateData[indexPath.row].rate),
-            currencyExchangeRate: String(exchangeRateData[indexPath.row].rate),
+            totalAmount: String(truncate(number: amountDouble * exchangeRateData[indexPath.row].rate, places: 2)),
+            currencyExchangeRate: String(truncate(number: exchangeRateData[indexPath.row].rate, places: 2)),
             image: UIImage(named: imageName) ?? UIImage()
         )
         cell?.update(with: model)
@@ -181,6 +181,10 @@ private extension MainController {
         return false
     }
     
+    func truncate(number: Double, places: Int) -> Double {
+        return round(number * pow(10.0, Double(places))) / pow(10.0, Double(places))
+    }
+
     func setupNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(goToCurrenciesList))
         title = "💱 Currencies"
@@ -337,4 +341,3 @@ private extension MainController {
         tryAgainButton.bottomAnchor.constraint(equalTo: errorView.bottomAnchor, constant: -UIGrid.padding).isActive = true
     }
 }
-
