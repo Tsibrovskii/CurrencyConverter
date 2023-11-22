@@ -137,7 +137,7 @@ extension MainController: UITableViewDataSource {
         let model = CurrencyInfoCell.Model(
             currencyId: currencyId,
             currencyName: currenciesStorage.getSymbolName(by: currencyId) ?? "",
-            totalAmount: String(truncate(number: amountDouble * exchangeRateData[indexPath.row].rate, places: 2)),
+            totalAmount: String(formatCurrency(number: amountDouble * exchangeRateData[indexPath.row].rate, places: 2)),
             currencyExchangeRate: String(truncate(number: exchangeRateData[indexPath.row].rate, places: 2)),
             image: UIImage(named: imageName) ?? UIImage()
         )
@@ -181,6 +181,15 @@ private extension MainController {
         return false
     }
     
+    func formatCurrency(number: Double, places: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+
+        return formatter.string(from: NSNumber(value: number)) ?? String(number)
+    }
+
     func truncate(number: Double, places: Int) -> Double {
         return round(number * pow(10.0, Double(places))) / pow(10.0, Double(places))
     }
